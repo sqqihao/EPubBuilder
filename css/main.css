@@ -59,7 +59,6 @@
     top:0;
 }
 
-
 /**
 控件栏
 */
@@ -85,7 +84,7 @@ ul.ui-list li{
 }
 #edit-panel  .pages .page{
     width:700px;
-    height:550px;
+    height:500px;
     margin:10px auto;
     border:1px solid #bbb;
     background: #ffffff;
