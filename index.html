@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="third/bootstrap-4.0.0-alpha/css/bootstrap.css"/>
+    <link rel="stylesheet" href="third/font-awesome-4.4.0/css/font-awesome.css"/>
+    <!---
+        artDialog的css和artDialog的opera风格样式
+    -->
+    <link rel="stylesheet" href="third/artDialog-master/css/ui-dialog.css" />
+    <link rel="stylesheet" href="third/artDialog-master/css/opera.css" />
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+    <!--
+        0：jquery
+        1：弹窗插件
+        2：bootstrap
+    -->
+    <script src="third/jq1.9.js"></script>
+    <script src="third/artDialog-master/dist/dialog-plus-min.js"></script>
+    <script src="third/bootstrap-4.0.0-alpha/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid header">
+        <div class="row">
+            <div class="mt4 selectnone">
+                <div class="col-xs-5">
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-file"></i>
+                        新建
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-folder-open"></i>
+                        加载
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-download"></i>
+                        下载
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-user"></i>
+                        电子书信息
+                    </button>
+                </div>
+                <div class="col-xs-2">
+                    <div class="input-group  input-group-sm">
+                        <span class="input-group-addon" id="title"><i class="fa fa-pencil-square"></i> 标题</span>
+                        <input type="text" class="form-control" placeholder="" aria-describedby="title">
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <button type="button" class="btn btn-info pull-right marginLeft10">
+                        <i class="fa fa-info-circle"></i>
+                        帮助
+                    </button>
+                    <button type="button" class="btn btn-info pull-right">
+                        <i class="fa fa-html5"></i>
+                        作者
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid bodyer">
+        <div class="row height100per">
+            <div class="col-xs-1 height100per overflowauto selectnone">
+                <!--
+                左侧分页导航栏
+                -->
+                <ul class="left-nav borderCommon" >
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="###" class="clone">
+                            <i class="fa fa-clone"></i>
+                        </a>
+                        <a href="###" class="trash">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-xs-1 height100per overflowauto selectnone">
+                <!--
+                控件栏
+                -->
+                <ul class="ui-list borderCommon">
+                    <li>
+                        <a>
+                            <i class="fa fa-paragraph" ></i> 文本
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-font"></i> 字体
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-bold"></i> 加粗
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-italic">斜体
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-underline"></i> 下划线
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-strikethrough"></i> 删除线
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-superscript"></i> 上标
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-subscript"></i> 下标
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-align-left"></i> 居左
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-align-justify"></i> 居中
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-align-right"></i> 居右
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-file-image-o"></i>图片
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-anchor"></i>锚链接
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-unlink"></i>去链接
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-table"></i>表格
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <i class="fa fa-music"></i>音频
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-xs-8 height100per ">
+                <!--
+                主要编辑区域
+                -->
+                <div id="edit-panel" class=" height100per">
+                    <ul class="pages padding0">
+                        <li class="page">
+                            page1
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-xs-2 height100per overflowauto selectnone">
+                <!--
+                    右侧属性栏
+                -->
+                <div id="props-panel" class="borderCommon">
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">
+                            <i class="fa fa-pencil-square-o fa-1x">属性面板</i>
+                        </div>
+                        <div class="panel-body">
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="width">宽</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="width">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="height">高</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="height">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="left">左</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="left">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="top">上</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="top">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="padding">内边距</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="padding">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="margin">外边距</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="margin">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="z_index">层级</span>
+                               <input type="text" class="form-control" placeholder="" aria-describedby="z_index">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="font">字体类型</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="font">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="color">字体颜色</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="color">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="size">字体大小</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="size">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="a_link">超链接</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="a_link">
+                            </div>
+                            <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="img_src">src链接</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="img_src">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer">
+        <div class="row">
+            <!---
+                底部信息栏
+            -->
+            <div id="info" class="alert alert-info padding0">
+                当前状态：编辑....
+            </div>
+        </div>
+    </div>
+</body>
+</html>
