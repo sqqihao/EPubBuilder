@@ -67,7 +67,10 @@
      font-size:15px;
  }
 ul.ui-list li{
-    padding-top: 10px;
+    padding-top: 4px;
+}
+ul.ui-list li a.btn{
+    padding:0em 1rem!important;
 }
 
 
@@ -88,6 +91,7 @@ ul.ui-list li{
     margin:10px auto;
     border:1px solid #bbb;
     background: #ffffff;
+    text-indent: 2em;
 }
 
 

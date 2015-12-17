@@ -72,10 +72,11 @@ var model = {
                         left : 0,
                         top : 0
                     }
-                },
+                },/*
                 {
                     "Com" : "NPaint",
                     //我们就把这些数据上传到七牛云存储
+                    //因为canvas的缩放会导致界面的重新绘， 所以这个组件就先不要啦;
                     //http://developer.qiniu.com/docs/v6/sdk/javascript-sdk.html
                     "data" : {
                         "src" : "七牛云地址"
@@ -84,7 +85,7 @@ var model = {
                     "style" : {
                         "left" : 0
                     }
-                },
+                },*/
                 {
                     // 这个实现是翻卡片，
                     // 当用户点击这个卡片的时候，会实现翻数据;

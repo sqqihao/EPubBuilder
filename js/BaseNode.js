@@ -56,15 +56,18 @@ $.extend(BaseNode.prototype, {
     },
 
     //这为元素添加几何属性
-    "addGeomProperties" : function(top, right, bottom, left, width, height) {
+    "addGeomProperties" : function(top, right, bottom, left, width, height, zIndex) {
 
         var props = [
             { name : "left", value : left || "0px"},
             { name : "top", value : top || "0px"},
             { name : "width", value : width || "10px"},
             { name : "height", value : height || "10px"},
-            { name : "right", value : right  || "0px"},
-            { name : "bottom", value : bottom || "0px"}
+            //一般来说，rihgt和bottom设置为自动;
+            { name : "right", value : right  || "auto"},
+            { name : "bottom", value : bottom || "auto"},
+            //默认的zIndex要为1;
+            { name : "z-index" , value : zIndex || "1"}
         ];
 
         this.addProperties( props );
@@ -113,16 +116,51 @@ $.extend(BaseNode.prototype, {
 
     },
 
-    "addHref" : function () {
-        
+    //为元素添加边框样式
+    "addPadding" : function (top, right, bottom, left) {
+
+        var props = [
+            { name : "borderTop" , value : top || "0px"},
+            { name : "borderRight" , value : right || "0px"},
+            { name : "borderBottom" , value : bottom || "0px"},
+            { name : "borderLeft" , value : left || "0px"}
+        ];
+
+        this.addProperties( props );
+
     },
-    
+
+    //添加href属性;
+    "addHref" : function ( url ) {
+        var props = [
+            { name : "href" , value : url || "" }
+            ];
+        this.addAttrs( props );
+    },
+
+    //添加src属性;
     "addSrc" : function () {
-        
+        var props = [
+            { name : "src" , value : url || "" }
+        ];
+        this.addAttrs( props );
     },
-    
+
     //返回数据结构模型;
     "toString" : function () {
-        return JSON.stringify( this.value );
+        return JSON.stringify( {value : this.value, attr : this.attr} );
     }
+
 });
+
+/**
+ * @desc 这个是属于文本节点， 拥有大部分的文本编辑功能, 以及盒模型;
+ * */
+var TextNode = function () {
+    this.apply(BaseNode, arguments);
+};
+TextNode.__proto__ = new BaseNode();
+TextNode.addFontProperties();
+TextNode.addGeomProperties();
+TextNode.addMargin();
+TextNode.addPadding();

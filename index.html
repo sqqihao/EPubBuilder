@@ -134,87 +134,65 @@
                 <!--
                 控件栏
                 -->
-                <ul class="ui-list borderCommon">
+                <ul id="ui-list" class="ui-list borderCommon">
+                    <!--
                     <li>
-                        <a>
-                            <i class="fa fa-paragraph" ></i> 文本
-                        </a>
+                        <a class='btn' data-role='undo' href='#'><i class='fa fa-undo'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-font"></i> 字体
-                        </a>
+                        <a class='btn' data-role='redo' href='#'><i class='fa fa-repeat'></i></a>
+                    </li>
+                    -->
+                    <li>
+                        <a class='btn' data-role='cut' href='#'><i class='fa fa-cut'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-bold"></i> 加粗
-                        </a>
+                        <a class='btn' data-role='copy' href='#'><i class='fa fa-copy'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-italic">斜体
-                            </i>
-                        </a>
+                        <a class='btn' data-role='paste' href='#'><i class='fa fa-paste'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-underline"></i> 下划线
-                        </a>
+                        <a class='btn' data-role='bold' href='#'><b>Bold</b></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-strikethrough"></i> 删除线
-                        </a>
+                        <a class='btn' data-role='italic' href='#'><em>Italic</em></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-superscript"></i> 上标
-                        </a>
+                        <a class='btn' data-role='underline' href='#'><u><b>U</b></u></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-subscript"></i> 下标
-                        </a>
+                        <a class='btn' data-role='strikeThrough' href='#'><strike>abc</strike></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-align-left"></i> 居左
-                        </a>
+                        <a class='btn' data-role='justifyLeft' href='#'><i class='fa fa-align-left'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-align-justify"></i> 居中
-                        </a>
+                        <a class='btn' data-role='justifyCenter' href='#'><i class='fa fa-align-center'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-align-right"></i> 居右
-                        </a>
+                        <a class='btn' data-role='justifyRight' href='#'><i class='fa fa-align-right'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-file-image-o"></i>图片
-                        </a>
+                        <a class='btn' data-role='justifyFull' href='#'><i class='fa fa-align-justify'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-anchor"></i>锚链接
-                        </a>
+                        <a class='btn' data-role='indent' href='#'><i class='fa fa-indent'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-unlink"></i>去链接
-                        </a>
+                        <a class='btn' data-role='outdent' href='#'><i class='fa fa-outdent'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-table"></i>表格
-                        </a>
+                        <a class='btn' data-role='insertUnorderedList' href='#'><i class='fa fa-list-ul'></i></a>
                     </li>
                     <li>
-                        <a>
-                            <i class="fa fa-music"></i>音频
-                        </a>
+                        <a class='btn' data-role='insertOrderedList' href='#'><i class='fa fa-list-ol'></i></a>
+                    </li>
+                    <li>
+                        <a class='btn' data-role='subscript' href='#'><i class='fa fa-subscript'></i></a>
+                    </li>
+                    <li>
+                        <a class='btn' data-role='superscript' href='#'><i class='fa fa-superscript'></i></a>
                     </li>
                 </ul>
             </div>
@@ -232,8 +210,25 @@
                         <i class="fa fa-forward"></i>
                         撤销
                     </button>
+
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-file-image-o"></i>
+                        图片
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-anchor"></i>
+                        锚链接
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-unlink"></i>
+                        去链接
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-music"></i>
+                        音频
+                    </button>
                     <ul class="pages padding0">
-                        <li class="page">
+                        <li class="page" contenteditable="true">
                             page1
                         </li>
                     </ul>
@@ -275,24 +270,12 @@
                                 <input type="text" class="form-control" placeholder="" aria-describedby="margin">
                             </div>
                             <div class="input-group  input-group-sm">
+                                <span class="input-group-addon" id="border">边框</span>
+                                <input type="text" class="form-control" placeholder="" aria-describedby="border">
+                            </div>
+                            <div class="input-group  input-group-sm">
                                 <span class="input-group-addon" id="z_index">层级</span>
                                <input type="text" class="form-control" placeholder="" aria-describedby="z_index">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="font">字体类型</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="font">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="color">字体颜色</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="color">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="size">字体大小</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="size">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="a_link">超链接</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="a_link">
                             </div>
                             <div class="input-group  input-group-sm">
                                 <span class="input-group-addon" id="img_src">src链接</span>
@@ -314,5 +297,6 @@
             </div>
         </div>
     </div>
+    <script src="js/events.js"></script>
 </body>
 </html>
