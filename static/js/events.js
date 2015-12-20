@@ -72,4 +72,22 @@ editDiv.addEventListener("keydown", function ( event ) {
     if(event.keyCode === 9 ) {
         event.preventDefault();
     }
-})
+});
+
+var client = new ZeroClipboard( document.getElementById("copy") );
+
+client.on( "ready", function( readyEvent ) {
+    client.on( "copy", function( event ) {
+        ZeroClipboard.setData("text/plain", window.getSelection().toString());
+    } );
+} );
+/*
+
+var paste = document.getElementById("paste");
+paste.addEventListener("click", function (event) {
+    var s = window.getSelection();
+    if( s ) {
+
+    };
+}, false);
+*/

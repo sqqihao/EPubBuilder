@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script src="//cdn.bootcss.com/jquery/3.0.0-alpha1/jquery.min.js"></script>
+<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+
+<script src="clipCopy.js"></script>
+
+<div class="line">
+    <h2>demo2 点击复制表单中的文本</h2>
+    <a href="#none" class="copy-input">点击复制单中的文本</a>
+    <input type="text" class="input" value="输入要复制的内容" />
+</div>
+
+<script>
+    /* 定义所有class为copy-input标签，点击后可复制class为input的文本 */
+    $(".copy-input").zclip({
+        path: "//cdn.bootcss.com/zclip/1.1.2/ZeroClipboard.swf",
+        copy: function(){
+            return window.getSelection().toString();
+        },
+        afterCopy:function(){/* 复制成功后的操作 */
+            var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>☺ 复制成功</div></div>");
+            $("body").find(".copy-tips").remove().end().append($copysuc);
+            $(".copy-tips").fadeOut(3000);
+        }
+    });
+</script>
+<div contenteditable="true">
+    111111
+    2
+    2
+    2
+    2
+    2
+    2
+    22
+    2
+    22
+    3
+    <div>
+        divdiv
+        divdiv
+        divdiv
+        divdiv
+    </div>
+    3
+    3
+    3
+    4
+    4
+    4
+    0000000000000
+    55555
+</div>
+<button id="copy">
+    copy
+</button>
+<button id="clip">
+    clip
+</button>
+<button id="paste">
+    paste
+</button>
+<script>
+    var copy = document.getElementById("copy");
+    var clip = document.getElementById("clip");
+    var paste = document.getElementById("paste");
+    function sameParent(el0, el1) {
+
+    };
+</script>
+</body>
+</html>

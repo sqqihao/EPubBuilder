@@ -34,6 +34,13 @@
     <script src="third/js-sdk-master/js-sdk-master/src/plupload/plupload.full.min.js"></script>
     <script src="third/qiniu.js"></script>
     <script src="js/ui.js"></script>
+
+
+    <script src="third/zeroClip/ZeroClipboard.js"></script>
+    <!--
+        颜色选择插件;
+    -->
+    <script src="third/jscolor-1.4.5/jscolor/jscolor.js"></script>
 </head>
 <body>
 
@@ -156,14 +163,14 @@
                     <!--
                     -->
                     <li>
-                        <a class='btn' data-role='cut' href='#'><i class='fa fa-cut'></i></a>
+                        <a class='btn' data-role='cut'  id="cut" href='#'><i class='fa fa-cut'></i></a>
                     </li>
                     <li>
-                        <a class='btn' data-role='copy' href='#'><i class='fa fa-copy'></i></a>
-                    </li>
+                        <a class='btn' data-role='copy' id="copy" href='#'><i class='fa fa-copy'></i></a>
+                    </li><!--
                     <li>
-                        <a class='btn' data-role='paste' href='#'><i class='fa fa-paste'></i></a>
-                    </li>
+                        <a class='btn' data-role='paste'  id="paste" href='#'><i class='fa fa-paste'></i></a>
+                    </li>-->
                     <li>
                         <a class='btn' data-role='bold' href='#'><b>Bold</b></a>
                     </li>
