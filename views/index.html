@@ -31,9 +31,17 @@
     <script src="http://gildas-lormeau.github.io/zip.js/demos/zip.js"></script>
     <script src="http://gildas-lormeau.github.io/zip.js/demos/mime-types.js"></script>
     -->
+
+    <!--
+    引用第三方的编辑器;
+    -->
+    <link rel="stylesheet" href="third/umeditor/themes/default/_css/umeditor.css"/>
+    <script type="text/javascript" charset="utf-8" src="third/umeditor/umeditor.config.js"></script>
+    <script src="third/umeditor/_src/editor_api.js"></script>
+    <script type="text/javascript" src="third/umeditor/lang/zh-cn/zh-cn.js"></script>
+
     <script src="third/js-sdk-master/js-sdk-master/src/plupload/plupload.full.min.js"></script>
     <script src="third/qiniu.js"></script>
-    <script src="js/ui.js"></script>
 
 
     <script src="third/zeroClip/ZeroClipboard.js"></script>
@@ -41,6 +49,14 @@
         颜色选择插件;
     -->
     <script src="third/jscolor-1.4.5/jscolor/jscolor.js"></script>
+<!--
+    <script src="http://julianlam.github.io/tabIndent.js/js/tabIndent.js"></script>-->
+
+    <!--
+        引用基本的JS组件;
+    -->
+    <script src="js/ui.js"></script>
+    <script src="js/util.js"></script>
 </head>
 <body>
 
@@ -54,10 +70,6 @@
         <div class="row">
             <div class="mt4 selectnone">
                 <div class="col-xs-5">
-                    <button type="button" class="btn btn-primary">
-                        <i class="fa fa-file"></i>
-                        新建
-                    </button>
                     <button type="button" class="btn btn-primary">
                         <i class="fa fa-folder-open"></i>
                         加载
@@ -92,227 +104,37 @@
     </div>
     <div class="container-fluid bodyer">
         <div class="row height100per">
-            <div class="col-xs-1 height100per overflowauto selectnone">
+            <div class="col-xs-2 height100per overflowauto selectnone">
                 <!--
                 左侧分页导航栏
                 -->
-                <ul class="left-nav borderCommon" >
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="###" class="clone">
-                            <i class="fa fa-clone"></i>
-                        </a>
-                        <a href="###" class="trash">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="col-xs-1 height100per overflowauto selectnone">
-                <!--
-                控件栏
-                -->
-                <ul id="ui-list" class="ui-list borderCommon">
-                    <!--
-                    -->
-                    <li>
-                        <a class='btn' data-role='cut'  id="cut" href='#'><i class='fa fa-cut'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='copy' id="copy" href='#'><i class='fa fa-copy'></i></a>
-                    </li><!--
-                    <li>
-                        <a class='btn' data-role='paste'  id="paste" href='#'><i class='fa fa-paste'></i></a>
-                    </li>-->
-                    <li>
-                        <a class='btn' data-role='bold' href='#'><b>Bold</b></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='italic' href='#'><em>Italic</em></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='underline' href='#'><u><b>U</b></u></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='strikeThrough' href='#'><strike>abc</strike></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='justifyLeft' href='#'><i class='fa fa-align-left'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='justifyCenter' href='#'><i class='fa fa-align-center'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='justifyRight' href='#'><i class='fa fa-align-right'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='justifyFull' href='#'><i class='fa fa-align-justify'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='indent' href='#'><i class='fa fa-indent'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='outdent' href='#'><i class='fa fa-outdent'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='insertUnorderedList' href='#'><i class='fa fa-list-ul'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='insertOrderedList' href='#'><i class='fa fa-list-ol'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='subscript' href='#'><i class='fa fa-subscript'></i></a>
-                    </li>
-                    <li>
-                        <a class='btn' data-role='superscript' href='#'><i class='fa fa-superscript'></i></a>
-                    </li>
-                    <li>
-                        <a class="btn" data-role='insertImage' href="#"><i class="fa fa-image"></i></a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-xs-8 height100per ">
-                <!--
-                主要编辑区域
-                -->
-                <div id="edit-panel" class=" height100per">
-                    <div class="com-list">
-
-                        <div class="btn-group">
-                            <a class="btn com" href="###">
-                                <i class='fa fa-undo'></i>
-                                返回
+                <div class="borderCommon">
+                    <button type="button" class="btn btn-primary">
+                        <i class="fa fa-file"></i>
+                        新建
+                    </button>
+                    <ul class="left-nav" id="left-nav" >
+                        <li>
+                            <a href="###" class="clone">
+                                <i class="fa fa-clone"></i>
                             </a>
-                            <a class="btn com" href="###">
-                                <i class='fa fa-repeat'></i>
-                                撤销
+                            <a href="###" class="trash">
+                                <i class="fa fa-trash"></i>
                             </a>
-                        </div>
-                        <div class="btn-group">
-                            <a class="btn com" href="###">
-                                <i class="fa fa-file-image-o"></i>
-                                图片
-                            </a>
-                            <a class="btn com" href="###">
-                                <i class="fa fa-anchor"></i>
-                                锚链接
-                            </a>
-                            <a class="btn com" href="###">
-                                <i class="fa fa-unlink"></i>
-                                去链接
-                            </a>
-                            <a class="btn com" href="###">
-                                <i class="fa fa-music"></i>
-                                音频
-                            </a>
-                        </div>
-                    </div>
-                    <ul class="pages padding0">
-                        <li class="page">
-                            <div id="edit-div" class="edit-div" contenteditable>
-                            </div>
                         </li>
                     </ul>
                 </div>
             </div>
-
-            <div class="col-xs-2 height100per overflowauto selectnone">
-                <!--
-                    右侧属性栏
-                -->
-                <div id="props-panel" class="borderCommon">
-                    <div class="panel panel-default">
-                        <div class="panel-heading text-center">
-                            <i class="fa fa-pencil-square-o fa-1x">属性面板</i>
-                        </div>
-                        <div class="panel-body">
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="width">宽</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="width">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="height">高</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="height">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="left">左</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="left">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="top">上</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="top">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="padding">内边距</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="padding">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="margin">外边距</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="margin">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="border">边框</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="border">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="z_index">层级</span>
-                               <input type="text" class="form-control" placeholder="" aria-describedby="z_index">
-                            </div>
-                            <div class="input-group  input-group-sm">
-                                <span class="input-group-addon" id="img_src">src链接</span>
-                                <input type="text" class="form-control" placeholder="" aria-describedby="img_src">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="col-xs-10 height100per overflowauto">
+                <ul id="content-nav">
+                    <li>
+                        <div id="myEditor"></div>
+                    </li>
+                    <script>
+                        //实例化编辑器
+                        var um = UM.getEditor('myEditor');
+                    </script>
+                </ul>
             </div>
         </div>
     </div>

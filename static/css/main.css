@@ -33,7 +33,7 @@
     overflow: auto;
 }
 .left-nav li{
-    height: 64px;
+    height: 90px;
     background: #fff;
     margin-top: 10px;
     border: 1px solid #ccc;
@@ -50,13 +50,13 @@
 }
 .left-nav .clone {
     position: absolute;
-    right: 20px;
-    top: 0;
+    right: 30px;
+    top: 4px;
 }
 .left-nav .trash{
     position: absolute;
-    right: 0;
-    top:0;
+    right: 10px;
+    top:4px;
 }
 
 /**
@@ -86,7 +86,7 @@ ul.ui-list li a.btn{
 #edit-panel  .pages{
 }
 #edit-panel  .pages .page{
-    width:700px;
+    width:900px;
     height:500px;
     margin:10px auto;
     border:1px solid #bbb;

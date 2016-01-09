@@ -3,6 +3,9 @@ html,body{
     height: 100%;
     font-family: "微软雅黑";
 }
+ul{
+    padding:0;
+}
 
 a{
     color: #000;

@@ -45,6 +45,15 @@ function uploadFn () {
     input.click();
 };
 
+$("#left-nav").delegate("li", "click", function () {
+    //alert(1)
+});
+
+$("#content-nav").delegate("li", "click", function () {
+    //alert(2)
+});
+
+/*
 var uiList = document.getElementById("ui-list");
 uiList.addEventListener("click", function ( event ) {
     event = event || window.event;
@@ -63,14 +72,15 @@ uiList.addEventListener("click", function ( event ) {
     }else if( elA  &&  role) {
         document.execCommand(role, false, null);
     };
-
 }, false);
 
 var editDiv = document.getElementById("edit-div");
 editDiv.addEventListener("keydown", function ( event ) {
     event = event || window.event;
     if(event.keyCode === 9 ) {
+        util.addIndent();
         event.preventDefault();
+        event.stopPropagation();
     }
 });
 
@@ -80,9 +90,9 @@ client.on( "ready", function( readyEvent ) {
     client.on( "copy", function( event ) {
         ZeroClipboard.setData("text/plain", window.getSelection().toString());
     } );
-} );
+});
+*/
 /*
-
 var paste = document.getElementById("paste");
 paste.addEventListener("click", function (event) {
     var s = window.getSelection();
