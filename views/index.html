@@ -74,7 +74,7 @@
                         <i class="fa fa-folder-open"></i>
                         加载
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" id="download" class="btn btn-primary">
                         <i class="fa fa-download"></i>
                         下载
                     </button>
@@ -108,32 +108,17 @@
                 <!--
                 左侧分页导航栏
                 -->
-                <div class="borderCommon">
-                    <button type="button" class="btn btn-primary">
+                <div class="borderCommon"  id="left-nav" >
+                    <ul class="left-nav">
+                    </ul>
+                    <button type="button" class="btn btn-primary addli">
                         <i class="fa fa-file"></i>
                         新建
                     </button>
-                    <ul class="left-nav" id="left-nav" >
-                        <li>
-                            <a href="###" class="clone">
-                                <i class="fa fa-clone"></i>
-                            </a>
-                            <a href="###" class="trash">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
             </div>
             <div class="col-xs-10 height100per overflowauto">
-                <ul id="content-nav">
-                    <li>
-                        <div id="myEditor"></div>
-                    </li>
-                    <script>
-                        //实例化编辑器
-                        var um = UM.getEditor('myEditor');
-                    </script>
+                <ul id="content-nav" class="content-nav">
                 </ul>
             </div>
         </div>
@@ -148,7 +133,17 @@
             </div>
         </div>
     </div>
+    <script src="js/jszip.min.js"></script>
+    <script src="js/FileSaver.js"></script>
+    <script src="third/handlebars.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/EpubBuilder.js"></script>
+    <script src="js/template.js"></script>
+    <script src="js/EpubBuilder.js"></script>
     <script src="js/events.js"></script>
+    <script src="js/Left.js"></script>
+    <script src="js/Content.js"></script>
+    <script src="js/Editor.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

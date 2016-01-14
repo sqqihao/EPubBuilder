@@ -139,7 +139,7 @@ $.extend(window.util, {
                     util.$G(option.loading_Id).innerHTML = "<div class='hook_con'><img class='loading_pic' src='images/loading.gif'/></div>";
             }
         };
-        ajaxRequest.open("post", option.url, true);
+        ajaxRequest.open("post", option.url, option.async || true);
         ajaxRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
         ajaxRequest.send(option.param);
     },
@@ -162,5 +162,13 @@ $.extend(window.util, {
             }
         }
         return xmlHttp;
+    },
+
+    uuid : function () {
+       var S4 = function() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
+
     }
 });

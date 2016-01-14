@@ -1,11 +1,22 @@
 /**
+ * 使用了百度的编辑器， 大大简化了富文本编辑方面的开发
  * @desc 大概思路;
  * 解压和压缩的实现
- * 根据page内容生成html， 然后包裹成电子书文件
- * page列表的事件(添加，删除)绑定；
- * execCommand列表的事件绑定；
- * 自定义控件的事件绑定；
- * 返回和撤销返回的实现；
- * 绑定控件属性到数据模型；
- * 元素的拖拽和几何属性的改变；
+ * 主要的main方法， 整个编辑器的初始化和事件的控制， 以及导出等；
+ * 左侧的视图， 右侧的可编辑内容；
  * */
+var editor = new Editor("#left-nav","#content-nav");
+var epub = new EpubBuilder();
+/*
+epub.exportToEpub({
+    contentArray : ["1","2"],
+    tocArray : ["1","2"]
+});
+*/
+function events() {
+    $("#download").bind("click", function() {
+        epub.exportToEpub(editor.getData());
+    })
+};
+
+events();

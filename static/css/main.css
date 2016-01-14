@@ -41,6 +41,9 @@
     text-align: center;
     padding-top:20px;
 }
+.left-nav li.active{
+    border-color:#00BCD4;
+}
 .left-nav li:before{
     counter-increment: inc;
     content: counter(inc);
@@ -58,6 +61,10 @@
     right: 10px;
     top:4px;
 }
+.left-nav input{
+    width: 100%;
+    margin-top: 20px;
+}
 
 /**
 控件栏
@@ -74,35 +81,9 @@ ul.ui-list li a.btn{
 }
 
 
-/**
-主要编辑区域
-*/
-#edit-panel{
-    padding: 10px;
-    overflow: auto;
-    background: #eee;
-    border-radius: 4px;
+.content-nav li{
+    padding-top:20px;
 }
-#edit-panel  .pages{
-}
-#edit-panel  .pages .page{
-    width:900px;
-    height:500px;
-    margin:10px auto;
-    border:1px solid #bbb;
-    background: #ffffff;
-    overflow: auto;
-}
-
-#edit-panel  .pages .page .edit-div{
-    min-height:498px;
-}
-
-/**
-右侧属性栏
-*/
-#props-panel{
-}
-#props-panel .input-group{
-    margin-top:10px;
+.content-nav li.active .edui-container{
+    border-color:#00BCD4
 }

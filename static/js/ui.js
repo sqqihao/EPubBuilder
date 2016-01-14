@@ -307,6 +307,9 @@
             return r;
         }
     };
+
+    util.EventBase = EventBase;
+
     /**
      * 获得对象所拥有监听类型的所有监听器
      * @public

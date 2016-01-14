@@ -45,13 +45,6 @@ function uploadFn () {
     input.click();
 };
 
-$("#left-nav").delegate("li", "click", function () {
-    //alert(1)
-});
-
-$("#content-nav").delegate("li", "click", function () {
-    //alert(2)
-});
 
 /*
 var uiList = document.getElementById("ui-list");
