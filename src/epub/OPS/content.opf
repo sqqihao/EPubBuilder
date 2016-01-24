@@ -17,7 +17,7 @@
             <item id="css" href="css/main.css" media-type="text/css" />
             <item id="cover-image" href="{{options.coverImage}}" media-type="image/jpeg"/>
             {{#each tocItem}}
-                <item id="{{href}}" href="{{href}}.html" media-type="application/xhtml+xml"/>
+                <item id="{{href}}" href="{{href}}" media-type="application/xhtml+xml"/>
             {{/each}}
         </manifest>
         <spine toc="ncx">
