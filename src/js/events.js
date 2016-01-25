@@ -1,10 +1,13 @@
-
+/*
 var qiniuDomain = "http://7xpbs2.com1.z0.glb.clouddn.com/";
 
 //文件上传成功的回调;
 function  fileUploadSuccess() {
 
 };
+*/
+
+/*
 
 var uploader = Qiniu.uploader({
     runtimes: 'html5,flash,html4',
@@ -36,7 +39,8 @@ var uploader = Qiniu.uploader({
 function uploadFn () {
     var input = document.createElement("input");
     input.type = "file";
-    input.accept = "image/*";
+    input.accept = "image*/
+/*";
     input.onchange = function ( ev ) {
         uploader.addFile(ev.target.files[0], [ ev.target.files[0].filename ]);
         uploader.start();
@@ -44,6 +48,7 @@ function uploadFn () {
     };
     input.click();
 };
+*/
 
 
 /*

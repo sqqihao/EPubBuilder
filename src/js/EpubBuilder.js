@@ -60,7 +60,6 @@ $.extend(EpubBuilder.prototype, {
             title : "title",
             contributor : "contributor",
             ISBN : "xxxx-xxxx"
-
         }, options);
 
         var zip = new JSZip();

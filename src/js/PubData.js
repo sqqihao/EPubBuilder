@@ -65,6 +65,7 @@ var PubData = function(left, content) {
     this.init();
 
 };
+
 $.extend(PubData.prototype, {
     /*
     * @desc 元素初始化的时候出发一次“创建”的点击事件;
@@ -73,13 +74,20 @@ $.extend(PubData.prototype, {
         this.left.left.find(".addli").trigger("click");
     },
 
+    /**
+    * @desc 获取界面编辑器的数据;
+    * @return {Object} {tocArray:[],  contentArray:[]};
+    * */
     "getData" : function() {
+
         var tocArray = this.left.left.find("ul input").map(function() {
             return this.value;
         });
+
         var contentArray = this.content.content.find(".edui-body-container").map(function() {
             return UM.getEditor(this.id).getContent();
-        });;
+        });
+
         return {
             tocArray : tocArray,
             contentArray : contentArray

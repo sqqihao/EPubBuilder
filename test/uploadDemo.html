@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../src/third/jq1.9.js"></script>
+    <script src="third/fileupload/demo/js/plupload/plupload.full.min.js"></script>
+    <script src="third/fileupload/demo/js/plupload/i18n/zh_CN.js"></script>
+    <script src="third/fileupload/demo/js/qiniu.js"></script>
+</head>
+<body>
+<a id="pickfiles" href="###">
+    upload
+</a>
+<script>
+    var uploader = Qiniu.uploader({
+        runtimes: 'html5,flash,html4',
+        browse_button: 'pickfiles',
+        container: 'container',
+        drop_element: 'container',
+        max_file_size: '100mb',
+        flash_swf_url: 'js/plupload/Moxie.swf',
+        dragdrop: true,
+        chunk_size: '4mb',
+        uptoken_url: $('#uptoken_url').val(),
+        domain: $('#domain').val(),
+        get_new_uptoken: false,
+        auto_start: true,
+        init: {
+            'FilesAdded': function(up, files) {
+                plupload.each(files, function(file) {
+                    alert("加载文件");
+                });
+            },
+            'BeforeUpload': function(up, file) {
+                alert("上传之前");
+            },
+            'UploadProgress': function(up, file) {
+                console.log(file.percent);
+            },
+            'UploadComplete': function() {
+                alert("上传完毕");
+            },
+            'FileUploaded': function(up, file, info) {
+                alert("一个文件上传完毕");
+            },
+            'Error': function(up, err, errTip) {
+                alert("文件上传报错了");
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

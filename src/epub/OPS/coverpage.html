@@ -1,8 +1,18 @@
 <html>
     <head>
         <meta charset="utf-8"/>
+        <style>
+            html>body{
+                text-align: center!important;
+            }
+        </style>
     </head>
     <body>
-        {{options.coverpage}}
+        <svg xmlns="http://www.w3.org/2000/svg" height="100%" preserveAspectRatio="none" version="1.1" viewBox="0 0 323 500" width="100%" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <image height="500" width="100%" xlink:href="{{options.coverImage}}"></image>
+        </svg>
+        <h1>
+            {{options.coverpage}}
+        </h1>
     </body>
 </html>

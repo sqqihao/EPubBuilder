@@ -15,7 +15,7 @@ function events() {
         var data = pubData.getData();
         var coverImages =  $("#coverImage").next()[0].files.length;
         $.each($(".export-div form").serializeArray(),function(i,e) {
-            data[ e.name ] = e.value;
+            e.value&&(data[ e.name ] = e.value);
         });
 
         if( coverImages ) {
@@ -37,3 +37,4 @@ function events() {
 };
 
 events();
+
