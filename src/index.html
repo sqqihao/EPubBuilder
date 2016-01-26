@@ -10,9 +10,10 @@
 
     <!---
         artDialog的css和artDialog的opera风格样式
-    -->
     <link rel="stylesheet" href="third/artDialog-master/css/ui-dialog.css" />
     <link rel="stylesheet" href="third/artDialog-master/css/opera.css" />
+    -->
+
     <link rel="stylesheet" href="css/common.css"/>
     <link rel="stylesheet" href="css/main.css"/>
     <!--
@@ -21,9 +22,14 @@
         2：bootstrap
     -->
     <script src="third/jq1.9.js"></script>
+    <!--
     <script src="third/artDialog-master/dist/dialog-plus-min.js"></script>
+    -->
     <script src="third/bootstrap-4.0.0-alpha/js/bootstrap.min.js"></script>
     <script src="third/prefixfree.min.js"></script>
+    <!--
+    <script src="third/handlebars.js"></script>
+    -->
     <!--
         压缩和解压缩需要zip.js;
     -->
@@ -40,14 +46,9 @@
     <script src="third/umeditor/dist/umeditor.min.js"></script>
     <script type="text/javascript" src="third/umeditor/lang/zh-cn/zh-cn.js"></script>
 
-    <script src="third/js-sdk-master/js-sdk-master/src/plupload/plupload.full.min.js"></script>
-
-
-    <script src="third/zeroClip/ZeroClipboard.js"></script>
     <!--
         颜色选择插件;
     -->
-    <script src="third/jscolor-1.4.5/jscolor/jscolor.js"></script>
 
     <script src="third/umeditor/_src/plugins/imagePlugin.js"></script>
 <!--
@@ -59,15 +60,7 @@
     <script src="js/ui.js"></script>
     <script src="js/util.js"></script>
 </head>
-<body>
-<!--
-    <input type="hidden" id="domain" value="<%= domain %>">
-    <input type="hidden" id="uptoken_url" value="<%= uptoken_url %>">
-    <div id="container" info="隐藏的上传控件" style="display:none">
-        <div id="pickfiles" href="###">upload</div>
-    </div>
--->
-
+<body style="display: none">
     <div class="container-fluid header">
         <div class="row">
             <div class="mt4 selectnone">
@@ -125,9 +118,6 @@
     </div>
     <div class="container-fluid footer">
         <div class="row">
-            <!---
-                底部信息栏
-            -->
             <div id="info" class="alert alert-info padding0">
                 当前状态：编辑....
             </div>
@@ -179,24 +169,17 @@
                             <input type="text" class="form-control" name="fileName" placeholder="file-name" aria-describedby="fileName">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-default" id="build">Submit</button>
+                            <button class="btn btn-default" id="build">DownloadEpub</button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
     <script src="js/jszip.min.js"></script>
     <script src="js/FileSaver.js"></script>
-    <script src="third/handlebars.js"></script>
     <script src="js/util.js"></script>
-    <script src="js/template.js"></script>
-    <script src="js/EpubBuilder.js"></script>
-    <script src="js/events.js"></script>
-    <script src="js/Left.js"></script>
-    <script src="js/Content.js"></script>
-    <script src="js/PubData.js"></script>
-    <script src="js/main.js"></script>
+
+    <script src="third/require1.08.js" data-main="js/app"></script>
 </body>
 </html>
