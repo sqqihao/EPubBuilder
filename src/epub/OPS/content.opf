@@ -4,7 +4,7 @@
         <dc:publisher>{{options.publisher}}</dc:publisher>
         <dc:description>{{options.description}}</dc:description>
         <dc:language>{{options.language}}</dc:language>
-        <dc:creator opf:role="aut">{{options.creator}}</dc:creator>
+        <dc:creator opf:role="aut">{{options.author}}</dc:creator>
         <dc:title>{{options.title}}</dc:title>
         <dc:date>{{options.date}}</dc:date>
         <dc:contributor opf:role="bkp">{{options.contributor}}</dc:contributor>
