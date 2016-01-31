@@ -170,5 +170,17 @@ $.extend(window.util, {
         };
         return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 
+    },
+
+    readArrayBuffer : function ( file ) {
+        var def = $.Deferred();
+        var arrayBuffer;
+        var fileReader = new FileReader();
+        fileReader.onload = function() {
+            arrayBuffer = this.result;
+            def.resolve( arrayBuffer );
+        };
+        fileReader.readAsArrayBuffer( file );
+        return def;
     }
 });

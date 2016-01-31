@@ -39,7 +39,9 @@ define(["tpl/tpl"], function(TEMPLATE) {
                 _this.fireEvent("onclick", $(this.parentNode).index());
             });
         },
-
+        /**
+         * @desc 添加编辑器的内容;
+         * */
         "addContent" : function ( index, html ) {
             //生成静态结构
             var content = $( TEMPLATE.contentTpl);

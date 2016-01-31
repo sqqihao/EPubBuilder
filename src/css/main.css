@@ -48,8 +48,9 @@
     counter-increment: inc;
     content: counter(inc);
     position: absolute;
-    top: 20px;
-    left:4px;
+    top: 6px;
+    left: 4px;
+    font-weight: bold;
 }
 .left-nav .clone {
     position: absolute;

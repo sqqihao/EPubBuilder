@@ -23,7 +23,8 @@ define(["Construct/Content", "Construct/Left", "tpl/tpl"],function(Content, Left
         this.content.addonshow(function(type, index) {
             $(_this.content.content.children()[index]).addClass("active").siblings().removeClass("active");
             var content = _this.content.content.children( )[index];
-            content&&content.scrollIntoView&&content.scrollIntoView();
+            $(content).show().siblings().hide();
+            //content&&content.scrollIntoView&&content.scrollIntoView();
         });
         /*
          * @desc 当右侧编辑区域被点击的时候;
@@ -59,7 +60,9 @@ define(["Construct/Content", "Construct/Left", "tpl/tpl"],function(Content, Left
          * @desc 为导航列表绑定自定义事件;
          * */
         this.left.addonclone(function ( type, index ) {
-            _this.left.left.find("ul").append( template.leftTpl );
+            var li = $(TEMPLATE.leftTpl);
+            li.find("input").val( $( _this.left.left.find("ul").children()[index]).find("input").val() );
+            _this.left.left.find("ul").append( li );
             _this.content.fireEvent("onclone", index );
         });
 
@@ -93,6 +96,29 @@ define(["Construct/Content", "Construct/Left", "tpl/tpl"],function(Content, Left
                 tocArray : tocArray,
                 contentArray : contentArray
             }
+        },
+
+        /**
+         * @desc 设置数据到view中;
+         * @param {Array}, {Array}
+         *      [], []
+         * @example setData( [1,2,3,4], [11,22,33,44] );
+         * */
+        "setData" : function ( tocArray, contentArray ) {
+            var _this = this;
+            _this.left.left.find("ul").html("");
+            _this.content.content.html("");
+            $.each(tocArray, function (i, e) {
+
+                //添加左侧nav
+                var li = $(TEMPLATE.leftTpl);
+                li.find("input").val( $.trim(e) );
+                _this.left.left.find("ul").append( li );
+
+                //添加右侧内容;
+                _this.content.addContent( window.undefined , contentArray[i] );
+
+            });
         }
     })
 

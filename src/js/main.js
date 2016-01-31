@@ -5,17 +5,19 @@
  * 主要的main方法， 整个编辑器的初始化和事件的控制， 以及导出等；
  * 左侧的视图， 右侧的可编辑内容；
  * */
-define(["PubData", "EpubBuilder"], function(PubData, EpubBuilder) {
+define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, EpubBuilder, DublinCore) {
     var pubData = new PubData("#left-nav","#content-nav");
     var epub = new EpubBuilder();
+    var dublinCore  = new DublinCore();
 
     $("#build").bind("click", function(  ) {
 
         var data = pubData.getData();
+
+        //获取目录结构，并合并到data中;
+        $.extend(data, dublinCore.getDublinCore());
+
         var coverImages =  $("#coverImage").next()[0].files.length;
-        $.each($(".export-div form").serializeArray(),function(i,e) {
-            e.value&&(data[ e.name ] = e.value);
-        });
 
         if( coverImages ) {
             var file = $("#coverImage").next()[0].files[0];
@@ -32,5 +34,12 @@ define(["PubData", "EpubBuilder"], function(PubData, EpubBuilder) {
 
         return false;
 
-    })
+    });
+
+    $("#open").click(function() {
+
+        epub.importEpub(pubData);
+
+    });
+
 })
