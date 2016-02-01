@@ -16,8 +16,7 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, Epu
 
         //获取目录结构，并合并到data中;
         $.extend(data, dublinCore.getDublinCore());
-
-        var coverImages =  $("#coverImage").next()[0].files.length;
+        var coverImages =  $("#coverImage").next()[0].files.length && util.isImage($("#coverImage").next()[0].files[0].type);
 
         if( coverImages ) {
             var file = $("#coverImage").next()[0].files[0];

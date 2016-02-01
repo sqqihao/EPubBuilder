@@ -1,5 +1,10 @@
+/**
+ * @desc 依赖于jQuery和jQuery.xmlns.js;
+ * */
 define(function() {
-
+    /*
+    $.xmlns["dc"] = "http://purl.org/dc/elements/1.1/";
+    */
     function Toc( ) {
     };
 
@@ -17,17 +22,16 @@ define(function() {
 
     /**
      * @desc 设置dublinCore的核心到html中;
-     * @param {name : "name" , value : "value" };
+     * @param {HTML ELEMENT};
      * return void;
      * */
-    Toc.prototype.setDublinCore = function ( obj ) {
+    Toc.prototype.setDublinCore = function ( xmlElement ) {
         var form = $(".export-div form");
-        $(obj).find("metadata").children().each(function(i, e) {
+        $(xmlElement).find("metadata").children().each(function(i, e) {
             var name = e.tagName.split(":").pop() || "";
-            form.find("[name="+ name+"]").val( e.textContent || e.innerText );
+            name&&form.find("[name="+ name+"]").val( e.textContent || e.innerText );
         });
     };
 
     return Toc;
-
 });

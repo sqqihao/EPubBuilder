@@ -11,13 +11,13 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             var _this = this;
             $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/mimetype", "success":function(data) {
                 _this.mimetype = data;
-            }})
+            }});
             $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/META-INF/container.xml", "success":function(data) {
                 _this.container = data;
-            }})
+            }});
             $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/toc.ncx", "success":function(data) {
                 _this.toc = data;
-            }})
+            }});
             $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/content.opf", "success":function(data) {
                 _this.contentOpt = data;
             }});
@@ -83,7 +83,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 var els = $tocNcx.find("content");
                 for(var i=0; i<els.length ; i++ ) {
                     if(els[i].getAttribute("src") === href) {
-                        return els[i]
+                        return els[i];
                     };
                 };
             };
@@ -146,8 +146,23 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             });
             //延迟对象马上开始迭代;
             orginDef.resolve();
+        },
 
-
+        /**
+         * @desc 把base64的图片转化为文件流;
+         * @return html;
+         * */
+        "base64toImage" : function ( content, zipImageFolder ) {
+            var $html = $(content);
+            $html.find("image").add( $html.find("img")).each(function(i, e) {
+                var uuid = util.uuid()+".jpg";
+                var href = $(e).attr("xlink:href") || $(e).attr("src");
+                href = href.split(",").pop();
+                zipImageFolder.file(  uuid , href  , {base64: true});
+                $(e).attr("xlink:href",  "images/" + uuid );
+                $(e).attr("src", "images/" + uuid )
+            });
+            return $("<div>").html( $html).html();
         },
 
         /**
@@ -180,9 +195,9 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 fileName : "default",
                 coverpage : "coverpage",
                 publisher : "publisher",
-                coverImage : "images/cover.jpg",
                 description : "description",
                 language : "language",
+                coverImage : "data:image/png;base64,R0lGODdhBQAFAIACAAAAAP/eACwAAAAABQAFAAACCIwPkWerClIBADs=",
                 creator : "creator",
                 author : "author",
                 title : "title",
@@ -192,6 +207,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
 
             var zip = new JSZip();
             var OPSFolder = zip.folder("OPS");
+            var imagesFolder = OPSFolder.folder("images");
 
             //循环contentArray和tocArray， 生成html字符串
             var chapterLength = options.contentArray.length;
@@ -204,6 +220,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                     name : options.tocArray[i],
                     href : "chapter" + i + ".html"
                 });
+                options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
                 //生成html数据;
                 OPSFolder.file("chapter" + i + ".html",options.contentArray[i] );
             };
