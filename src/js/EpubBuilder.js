@@ -44,7 +44,14 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             };
             return url || "";
         },
-
+        /**
+         * @desc 获取image图片的类型;
+         * @param {String} fileurl
+         * */
+        "getImageType" : function ( fileurl ) {
+            if(!fileurl)return ;
+            return fileurl.split(".").pop() || "";
+        },
         /**
          * @desc 导入epub文件
          * @param {Object} pubData把数据导入到pubdata中;
@@ -63,6 +70,9 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
 
         },
 
+        /**
+         * @desc 读取epub文件并展示到界面中;
+         * */
         "readEpub" : function ( unzip, pubData ) {
 
             var _this = this;
@@ -122,13 +132,14 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                             var src =  $(img).attr("src");
                             var url = OEBPSFolderName+"/"+dir.join("/")+"/"+ href || src;
                             var jpg = unzip.file( _this.toRelativeUrl(url) );
+                            var imageType = _this.getImageType( url );
                             var oFReader = new FileReader();
                             oFReader.onload = function (oFREvent) {
                                 //设置属性;
                                 $(img).attr(href ? "xlink:href" : "src", oFREvent.target.result );
                                 _def.resolve();
                             };
-                            oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/*'}));
+                            oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
                             return _def;
                         });
                     });
@@ -155,10 +166,11 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
         "base64toImage" : function ( content, zipImageFolder ) {
             var $html = $(content);
             $html.find("image").add( $html.find("img")).each(function(i, e) {
-                var uuid = util.uuid()+".jpg";
                 var href = $(e).attr("xlink:href") || $(e).attr("src");
-                href = href.split(",").pop();
-                zipImageFolder.file(  uuid , href  , {base64: true});
+                var dataUrl = href.split(",").pop();
+                var imageType = href.match(/data:image\/([\w\W]+);/i).pop();
+                var uuid = util.uuid()+"."+imageType;
+                zipImageFolder.file(  uuid , dataUrl  , {base64: true});
                 $(e).attr("xlink:href",  "images/" + uuid );
                 $(e).attr("src", "images/" + uuid )
             });
