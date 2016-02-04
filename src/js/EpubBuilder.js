@@ -172,7 +172,9 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 var uuid = util.uuid()+"."+imageType;
                 zipImageFolder.file(  uuid , dataUrl  , {base64: true});
                 $(e).attr("xlink:href",  "images/" + uuid );
-                $(e).attr("src", "images/" + uuid )
+                $(e).attr("src", "images/" + uuid );
+                //百度编辑器会设置一个_src属性和src一样； src如果为base64的话， 文件会很大;
+                $(e).attr("_src","");
             });
             return $("<div>").html( $html).html();
         },
