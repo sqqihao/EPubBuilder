@@ -24,6 +24,9 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/coverpage.html", "success":function(data) {
                 _this.coverpage = data;
             }});
+            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/page.html", "success":function(data) {
+                _this.page = data;
+            }});
         },
 
         /**
@@ -236,7 +239,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 });
                 options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
                 //生成html数据;
-                OPSFolder.file("chapter" + i + ".html",options.contentArray[i] );
+                OPSFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] ));
             };
 
             var MeTaFolder = zip.folder("META-INF");
