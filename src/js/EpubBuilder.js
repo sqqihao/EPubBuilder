@@ -107,7 +107,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             var contentArray = [];
             var def = $.Deferred();
             var orginDef = def;
-            $.each(elSpine.children, function( contentOpfSpinIndex , itemref ) {
+            $.each($(elSpine).children(), function( contentOpfSpinIndex , itemref ) {
                 var idref = itemref.getAttribute("idref");
                 var href = contentOptXmlDoc.getElementById( idref ).getAttribute("href");
                 //获取文件的目录;
@@ -139,7 +139,10 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                             var oFReader = new FileReader();
                             oFReader.onload = function (oFREvent) {
                                 //设置属性;
-                                $(img).attr(href ? "xlink:href" : "src", oFREvent.target.result );
+                                //$(img).attr(href ? "xlink:href" : "src", oFREvent.target.result );
+                                //如果是xlink-href的属性， 在chrome中并不会显示为图片;
+                                $(img).attr("xlink:href","");
+                                $(img).attr("src", oFREvent.target.result );
                                 _def.resolve();
                             };
                             oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
@@ -174,7 +177,8 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 var imageType = href.match(/data:image\/([\w\W]+);/i).pop();
                 var uuid = util.uuid()+"."+imageType;
                 zipImageFolder.file(  uuid , dataUrl  , {base64: true});
-                $(e).attr("xlink:href",  "images/" + uuid );
+                //$(e).attr("xlink:href",  "images/" + uuid );
+                $(e).attr("xlink:href",  "");
                 $(e).attr("src", "images/" + uuid );
                 //百度编辑器会设置一个_src属性和src一样； src如果为base64的话， 文件会很大;
                 $(e).attr("_src","");
