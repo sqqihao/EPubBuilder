@@ -1,9 +1,5 @@
 define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
     
-    Handlebars.registerHelper('SafeString', function(str) {  
-      return new Handlebars.SafeString( str );
-    });
-    
     //压缩成zip的工具:   JSZIP;
     var EpubBuilder = function () {
         this.init();
