@@ -1,4 +1,4 @@
-define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
+define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, PubData, icon ) {
     
     //压缩成zip的工具:   JSZIP;
     var EpubBuilder = function () {
@@ -128,7 +128,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                     //获取content的image, 并转化为base64的格式;
                     var imgs = $content.find("image").add( $content.find("img") );
                     $.each(imgs, function (i,  img ) {
-                        //把处理图片的罗家添加的延迟对象中;
+                        //把处理图片的逻辑添加的延迟对象中;
                         def = def.then(function() {
                             var _def = $.Deferred();
                             var href = $(img).attr("xlink:href");
@@ -140,30 +140,27 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                                 var oFReader = new FileReader();
                                 oFReader.onload = function (oFREvent) {
                                     //设置属性;
-                                    //$(img).attr(href ? "xlink:href" : "src", oFREvent.target.result );
-                                    //如果是xlink-href的属性， 在chrome中并不会显示为图片;
-                                    //$(img).attr("xlink:href","");
                                     $(img).attr("src", oFREvent.target.result );
                                     _def.resolve();
                                 };
                                 oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
                             }catch(e) {
                                 _def.resolve();
-                            }
+                            };
                             return _def;
                         });
                     });
 
                     def.then(function() {
                         var $divContent =  $("<div>").append($content);
-                        navArray[contentOpfSpinIndex] = navText
+                        navArray[contentOpfSpinIndex] = navText;
                         contentArray[contentOpfSpinIndex] =  $divContent.html();
                     });
                 };
             });
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
             def.then(function() {
-                pubData.setData(navArray, contentArray);
+                pubData.setData(util.clearArray(navArray), util.clearArray(contentArray));
             });
             //延迟对象马上开始迭代;
             orginDef.resolve();
@@ -221,7 +218,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 publisher : "publisher",
                 description : "description",
                 language : "language",
-                coverImage : "data:image/png;base64,R0lGODdhBQAFAIACAAAAAP/eACwAAAAABQAFAAACCIwPkWerClIBADs=",
+                coverImage : icon.appIcon,
                 creator : "creator",
                 author : "author",
                 title : "title",
