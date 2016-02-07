@@ -48,3 +48,11 @@ li{
 .overflowauto{
     overflow: auto;
 }
+
+/**
+*@desc https://github.com/fex-team/umeditor/issues/147
+*#拖拽图片改变大小，无论从哪个方向拖拽都只会越来越小 #147
+*/
+.edui-scale{
+    box-sizing:initial;
+}

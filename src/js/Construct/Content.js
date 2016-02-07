@@ -44,12 +44,12 @@ define(["tpl/tpl"], function(TEMPLATE) {
          * */
         "addContent" : function ( index, html ) {
             //生成静态结构
-            var content = $( TEMPLATE.contentTpl);
+            var content = $( TEMPLATE.contentTpl );
             content.find("div").attr("id", util.uuid());
             if( index!==undefined ) {
                 $(this.content.children()[index]).after( content );
             }else{
-                content.appendTo( this.content);
+                content.appendTo( this.content );
             };
             //渲染成编辑器;
             UM.getEditor( content.find("div")[0].id ).ready(function() {
