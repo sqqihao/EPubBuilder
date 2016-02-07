@@ -14,12 +14,12 @@
     </metadata>
         <manifest>
             <!-- Content Documents -->
-            <item id="coverpage" href="coverpage.html" media-type="application/xhtml+xml"/>
+            <item id="coverpage" href="Text/coverpage.html" media-type="application/xhtml+xml"/>
             <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
             <item id="css" href="css/main.css" media-type="text/css" />
             <item id="cover-image" href="{{options.coverImage}}" media-type="image/jpeg"/>
             {{#each tocItem}}
-                <item id="{{href}}" href="{{href}}" media-type="application/xhtml+xml"/>
+                <item id="{{href}}" href="Text/{{href}}" media-type="application/xhtml+xml"/>
             {{/each}}
         </manifest>
         <spine toc="ncx">

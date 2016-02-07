@@ -21,7 +21,7 @@
                         {{name}}
                     </text>
                 </navLabel>
-                <content src="{{href}}" />
+                <content src="Text/{{href}}" />
             </navPoint>
         {{/each}}
     </navMap>

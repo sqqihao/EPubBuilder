@@ -133,19 +133,23 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                             var _def = $.Deferred();
                             var href = $(img).attr("xlink:href");
                             var src =  $(img).attr("src");
-                            var url = OEBPSFolderName+"/"+dir.join("/")+"/"+ href || src;
+                            var url = OEBPSFolderName+"/"+dir.join("/")+"/"+ (href || src);
                             var jpg = unzip.file( _this.toRelativeUrl(url) );
                             var imageType = _this.getImageType( url );
-                            var oFReader = new FileReader();
-                            oFReader.onload = function (oFREvent) {
-                                //设置属性;
-                                //$(img).attr(href ? "xlink:href" : "src", oFREvent.target.result );
-                                //如果是xlink-href的属性， 在chrome中并不会显示为图片;
-                                $(img).attr("xlink:href","");
-                                $(img).attr("src", oFREvent.target.result );
+                            try{
+                                var oFReader = new FileReader();
+                                oFReader.onload = function (oFREvent) {
+                                    //设置属性;
+                                    //$(img).attr(href ? "xlink:href" : "src", oFREvent.target.result );
+                                    //如果是xlink-href的属性， 在chrome中并不会显示为图片;
+                                    //$(img).attr("xlink:href","");
+                                    $(img).attr("src", oFREvent.target.result );
+                                    _def.resolve();
+                                };
+                                oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
+                            }catch(e) {
                                 _def.resolve();
-                            };
-                            oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
+                            }
                             return _def;
                         });
                     });
@@ -177,9 +181,8 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 var imageType = href.match(/data:image\/([\w\W]+);/i).pop();
                 var uuid = util.uuid()+"."+imageType;
                 zipImageFolder.file(  uuid , dataUrl  , {base64: true});
-                //$(e).attr("xlink:href",  "images/" + uuid );
-                $(e).attr("xlink:href",  "");
-                $(e).attr("src", "images/" + uuid );
+                //$(e).attr("xlink:href",  "images/"+uuid);
+                $(e).attr("src", "../Images/"+uuid );
                 //百度编辑器会设置一个_src属性和src一样； src如果为base64的话， 文件会很大;
                 $(e).attr("_src","");
             });
@@ -228,7 +231,8 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
 
             var zip = new JSZip();
             var OPSFolder = zip.folder("OPS");
-            var imagesFolder = OPSFolder.folder("images");
+            var imagesFolder = OPSFolder.folder("Images");
+            var textFolder = OPSFolder.folder("Text");
 
             //循环contentArray和tocArray， 生成html字符串
             var chapterLength = options.contentArray.length;
@@ -243,7 +247,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
                 });
                 options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
                 //生成html数据;
-                OPSFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] }));
+                textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] }));
             };
 
             var MeTaFolder = zip.folder("META-INF");
@@ -253,7 +257,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             //生成toc和opt文件
             OPSFolder.file("content.opf", Handlebars.compile(this.contentOpt)({ tocItem : tocItem, options : options}) );
             OPSFolder.file("toc.ncx", Handlebars.compile(this.toc)(tocItem));
-            OPSFolder.file("coverpage.html", Handlebars.compile(this.coverpage)( {options : options}  ));
+            textFolder.file("coverpage.html", Handlebars.compile(this.coverpage)( {options : options}  ));
 
             var content = zip.generate({type:"blob"});
             // see FileSaver.js
