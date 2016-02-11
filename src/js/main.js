@@ -10,9 +10,11 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, Epu
     var epub = new EpubBuilder();
     var dublinCore  = new DublinCore();
 
-    $("#build").bind("click", function(  ) {
+    $("#build").bind("click", function( ev ) {
 
         var data = pubData.getData();
+        ev.stopPropagation();
+        ev.preventDefault();
 
         //获取目录结构，并合并到data中;
         $.extend(data, dublinCore.getDublinCore());
@@ -31,7 +33,6 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, Epu
             epub.exportToEpub(data);
         };
 
-        return false;
 
     });
 

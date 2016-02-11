@@ -63,7 +63,7 @@ define(["Construct/Content", "Construct/Left", "tpl/tpl"],function(Content, Left
             var li = $(TEMPLATE.leftTpl);
             li.find("input").val( $( _this.left.left.find("ul").children()[index]).find("input").val() );
             //_this.left.left.find("ul").append( li );
-            _this.left.left.find("li").eq(0).after( li );
+            _this.left.left.find("li").eq(index).after( li );
             _this.content.fireEvent("onclone", index );
         });
 

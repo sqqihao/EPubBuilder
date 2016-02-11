@@ -175,13 +175,18 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             $html.find("image").add( $html.find("img")).each(function(i, e) {
                 var href = $(e).attr("xlink:href") || $(e).attr("src");
                 var dataUrl = href.split(",").pop();
-                var imageType = href.match(/data:image\/([\w\W]+);/i).pop();
-                var uuid = util.uuid()+"."+imageType;
-                zipImageFolder.file(  uuid , dataUrl  , {base64: true});
-                //$(e).attr("xlink:href",  "images/"+uuid);
-                $(e).attr("src", "../Images/"+uuid );
-                //百度编辑器会设置一个_src属性和src一样； src如果为base64的话， 文件会很大;
-                $(e).attr("_src","");
+                /*
+                */
+                var imageType = href.match(/data:image\/([\w\W]+);/i);
+                imageType = imageType&&imageType.pop() || "";
+                if( imageType ) {
+                    var uuid = util.uuid()+"."+imageType;
+                    zipImageFolder.file(  uuid , dataUrl  , {base64: true});
+                    //$(e).attr("xlink:href",  "images/"+uuid);
+                    $(e).attr("src", "../Images/"+uuid );
+                    //百度编辑器会设置一个_src属性和src一样； src如果为base64的话， 文件会很大;
+                    $(e).attr("_src","");
+                };
             });
             return $("<div>").html( $html).html();
         },
@@ -236,15 +241,19 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             var tocItem = [];
             var contentItem = [];
 
-            for(var i=0; i< chapterLength; i++) {
-                //生成章节数据
-                tocItem.push({
-                    name : options.tocArray[i],
-                    href : "chapter" + i + ".html"
-                });
-                options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
-                //生成html数据;
-                textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] }));
+            try{
+                for(var i=0; i< chapterLength; i++) {
+                    //生成章节数据
+                    tocItem.push({
+                        name : options.tocArray[i],
+                        href : "chapter" + i + ".html"
+                    });
+                    options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
+                    //生成html数据;
+                    textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] }));
+                };
+            }catch(e) {
+                console.log(e);
             };
 
             var MeTaFolder = zip.folder("META-INF");
