@@ -158,6 +158,31 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                     });
                 };
             });
+
+            //读取coverpage和coverpage到options;
+            def.then(function() {
+                try{
+                    var _def = $.Deferred();
+                    var coverpageHtml =unzip.file(OEBPSFolderName+"/Text/coverpage.html").asText() || "";
+                    var coverpageHXmlDoc = domParser.parseFromString(coverpageHtml, 'text/xml');
+                    var img = $(coverpageHXmlDoc).find("img");
+                    var href = $(img).attr("xlink:href");
+                    var src =  $(img).attr("src");
+                    var url =  href || src;
+                    var imageType = _this.getImageType( url );
+                    var jpg = unzip.file( _this.toRelativeUrl(_this.toRelativeUrl(OEBPSFolderName+"/Text/"+url)) );
+                        var oFReader = new FileReader();
+                        oFReader.onload = function (oFREvent) {
+                            //设置属性;
+                            _this.dublinCore.setCover(oFREvent.target.result , $(coverpageHXmlDoc).find("h4").text());
+                            _def.resolve();
+                        };
+                        oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
+                    return _def;
+                }catch(e) {
+                    _this.dublinCore.setCover("" , $(coverpageHXmlDoc).find("h4").text());
+                };
+            });
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
             def.then(function() {
                 pubData.setData(util.clearArray(navArray), util.clearArray(contentArray));
@@ -172,7 +197,8 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
          * */
         "base64toImage" : function ( content, zipImageFolder ) {
             var $html = $(content);
-            $html.find("image").add( $html.find("img")).each(function(i, e) {
+            var wrap = $("<div>").append( $html );
+            wrap.find("image").add( wrap.find("img")).each(function(i, e) {
                 var href = $(e).attr("xlink:href") || $(e).attr("src");
                 var dataUrl = href.split(",").pop();
                 /*
@@ -188,7 +214,7 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                     $(e).attr("_src","");
                 };
             });
-            return $("<div>").html( $html).html();
+            return wrap.html();
         },
 
         /**
@@ -263,6 +289,9 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             //生成toc和opt文件
             OPSFolder.file("content.opf", Handlebars.compile(this.contentOpt)({ tocItem : tocItem, options : options}) );
             OPSFolder.file("toc.ncx", Handlebars.compile(this.toc)(tocItem));
+
+            //创建书籍的封面;
+            options.coverImage = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder);
             textFolder.file("coverpage.html", Handlebars.compile(this.coverpage)( {options : options}  ));
 
             var content = zip.generate({type:"blob"});

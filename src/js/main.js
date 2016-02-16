@@ -30,9 +30,9 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, Epu
                 epub.exportToEpub(data);
             };
         }else{
+            data.coverImage = $("#coverImage").attr("base64");
             epub.exportToEpub(data);
         };
-
 
     });
 

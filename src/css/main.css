@@ -28,9 +28,11 @@
 /**
 左侧分页导航栏
 */
+#left-nav{
+    overflow: auto;
+}
 .left-nav{
     counter-reset : inc 0;
-    overflow: auto;
 }
 .left-nav li{
     height: 90px;

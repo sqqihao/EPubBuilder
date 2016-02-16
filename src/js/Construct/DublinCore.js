@@ -33,5 +33,15 @@ define(function() {
         });
     };
 
+    /**
+     * @desc 设置电子书的描述和书籍封面图;
+     * */
+    Toc.prototype.setCover = function(base64, desc) {
+        var form = $(".export-div form");
+        form.find("[name=coverpage]").val( desc );
+        $("#coverImage").attr("base64", base64);
+        $("#coverImage").text("已选择");
+    }
+
     return Toc;
 });
