@@ -24,7 +24,6 @@ src/js/Construct文件夹包含了两个构造函数;
 src/js/tpl文件夹包含了的基础模板;
 
 #test目录
-=====
 测试用例文件夹， 一些小demo
 
 #演示地址

@@ -181,6 +181,7 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                     return _def;
                 }catch(e) {
                     _this.dublinCore.setCover("" , $(coverpageHXmlDoc).find("h4").text());
+                    console.log("封面图片加载失败");
                 };
             });
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
