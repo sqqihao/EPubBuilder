@@ -1,5 +1,5 @@
 #一款在线的epub格式书籍编辑器
-方便在线epub书籍的编辑;
+在线epub书籍的编辑;
 
 #浏览器支持;
 chrome; firefox; IE9+
