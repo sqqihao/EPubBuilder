@@ -1,10 +1,12 @@
 /**
  * @desc 依赖于jQuery和jQuery.xmlns.js;
  * */
-define(function() {
+define(["Construct/Lang"], function( LangFn ) {
     /*
     $.xmlns["dc"] = "http://purl.org/dc/elements/1.1/";
     */
+    var langFn = new LangFn();
+
     function Toc( ) {
     };
 
@@ -39,8 +41,8 @@ define(function() {
     Toc.prototype.setCover = function(base64, desc) {
         var form = $(".export-div form");
         form.find("[name=coverpage]").val( desc );
-        $("#coverImage").attr("base64", base64);
-        $("#coverImage").text("已选择");
+        $("#lang-coverImage").attr("base64", base64);
+        $("#lang-coverImage").text( langFn.getProperty("coverImage") );
     }
 
     return Toc;

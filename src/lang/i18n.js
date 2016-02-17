@@ -12,7 +12,8 @@ nono.I18N['zh-cn'] = {
     "dc" : "柏林核心",
     "state" : "状态",
     "stateValue" : "编辑",
-    "title" : "EpubBuilder编辑器"
+    "title" : "EpubBuilder编辑器",
+    "coverImage" : "已选择"
 };
 
 nono.I18N['en'] = {
@@ -25,5 +26,6 @@ nono.I18N['en'] = {
     "dc" : "Dublin Core",
     "state" : "state",
     "stateValue" : "editing",
-    "title" : "EpubBuilder"
+    "title" : "EpubBuilder",
+    "coverImage" : "selected"
 };

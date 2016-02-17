@@ -20,7 +20,16 @@
                 console.log(e);
             }
         };
-    }
+    };
+
+    LangFn.prototype.getProperty = function( prop ) {
+        var lang = EBConfig.lang;
+        var langObj = this.langObj = nono.I18N[lang];
+        if( langObj[prop] ) {
+           return langObj[prop];
+        };
+        return "";
+    };
 
     return LangFn;
 })
