@@ -44,6 +44,10 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                 * 处理 //// , //这种情况
                 * */
                 url = url.replace(/\/+/g,"/");
+
+                //处理只有一个正斜杠的情况、
+                //  "/sfdsf" , $1为匹配的第一个子元素;
+                url = url.replace(/^\/([^\/])/,"$1");
             };
             return url || "";
         },
@@ -82,12 +86,13 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             var containerXml = unzip.file("META-INF/container.xml").asText();
             var domParser = new DOMParser;
             var xmlDoc = domParser.parseFromString(containerXml, 'text/xml');
-            var fullPath  = xmlDoc.getElementsByTagName("rootfile")[0].getAttribute("full-path");
-            var OEBPSFolderName = fullPath.split("/")[0];
+            //fullPath.split("/")[0] == "content.opf" ? "" :
+            var fullPath  =  xmlDoc.getElementsByTagName("rootfile")[0].getAttribute("full-path") ;
+            var OEBPSFolderName =  fullPath.split("/")[0] === "content.opf" ? "" :  fullPath.split("/")[0];
             //读取contentOpt 文件;
             var contentOpt = unzip.file(fullPath).asText();
             //读取tocNcx 文件;
-            var tocNcx =  unzip.file(OEBPSFolderName +"/toc.ncx").asText();
+            var tocNcx =  unzip.file( _this.toRelativeUrl(OEBPSFolderName +"/toc.ncx") ).asText();
             var $tocNcx = $(tocNcx);
 
             var contentOptXmlDoc = domParser.parseFromString(contentOpt, 'text/xml');
@@ -122,7 +127,7 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                     navText = $(nav).prev("navlabel").text();
                     //console.log(navText);
 
-                    content = unzip.file(OEBPSFolderName+"/"+href).asText();
+                    content = unzip.file( _this.toRelativeUrl(OEBPSFolderName+"/"+href)).asText();
 
                     var $content = $(content);
                     //获取content的image, 并转化为base64的格式;
