@@ -1,4 +1,4 @@
-﻿#一款在线的epub格式书籍编辑器1
+﻿#一款在线的epub格式书籍编辑器
 方便在线epub书籍的编辑;
 
 #浏览器支持;
@@ -9,7 +9,7 @@ chrome; firefox; IE9+
 源代码目录，包含所有的js和css文件;
 Builder依赖
 
-dependencies         |
+dependencies | ·
 ------------- |
 bootstrap      |
 umeditor编辑器 |
@@ -25,6 +25,20 @@ src/js/tpl文件夹包含了的基础模板;
 
 #test目录
 测试用例文件夹， 一些小demo
+
+#语言
+src/js/config.js为项目语言的目录, 目前提供英语和中文两种语言， 默认为中文的配置如下;
+```
+var EBConfig = {
+        "lang" : "zh-cn"
+};
+```
+如果要使用英语的话，src/js/config.js要改成这样:
+```
+var EBConfig = {
+        "lang" : "en"
+};
+```
 
 #演示地址
 [http://sqqihao.github.io/EPubBuilder/src/index.html](http://sqqihao.github.io/EPubBuilder/src/index.html)

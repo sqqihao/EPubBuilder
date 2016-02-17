@@ -160,7 +160,7 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             });
 
             //读取coverpage和coverpage到options;
-            def.then(function() {
+            def = def.then(function() {
                 try{
                     var _def = $.Deferred();
                     var coverpageHtml =unzip.file(OEBPSFolderName+"/Text/coverpage.html").asText() || "";

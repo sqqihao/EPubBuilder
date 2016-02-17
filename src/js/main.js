@@ -5,7 +5,7 @@
  * 主要的main方法， 整个编辑器的初始化和事件的控制， 以及导出等；
  * 左侧的视图， 右侧的可编辑内容；
  * */
-define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, EpubBuilder, DublinCore) {
+define(["PubData", "EpubBuilder", "Construct/DublinCore", "Construct/Lang"], function(PubData, EpubBuilder, DublinCore, Lang) {
     var pubData = new PubData("#left-nav","#content-nav");
     var epub = new EpubBuilder();
     var dublinCore  = new DublinCore();
@@ -30,7 +30,7 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, Epu
                 epub.exportToEpub(data);
             };
         }else{
-            data.coverImage = $("#coverImage").attr("base64");
+            data.coverImage = $("#coverImage").attr("base64") || "";
             epub.exportToEpub(data);
         };
 
@@ -41,5 +41,8 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore"], function(PubData, Epu
         epub.importEpub(pubData);
 
     });
+
+    //初始化默认语言;
+    new Lang().init();
 
 })
