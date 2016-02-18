@@ -42,7 +42,7 @@ define(["Construct/Lang"], function( LangFn ) {
         var form = $(".export-div form");
         form.find("[name=coverpage]").val( desc );
         $("#lang-coverImage").attr("base64", base64);
-        $("#lang-coverImage").text( langFn.getProperty("coverImage") );
+        !!base64&&$("#lang-coverImage").text( langFn.getProperty("coverImage") );
     }
 
     return Toc;
