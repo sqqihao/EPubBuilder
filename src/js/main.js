@@ -30,6 +30,7 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore", "Construct/Lang"], fun
                 epub.exportToEpub(data);
             };
         }else{
+            //读取base64 编码的coverimage;
             data.coverImage = $("#lang-coverImage").attr("base64") || "";
             epub.exportToEpub(data);
         };

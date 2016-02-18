@@ -91,8 +91,16 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             var OEBPSFolderName =  fullPath.split("/")[0] === "content.opf" ? "" :  fullPath.split("/")[0];
             //读取contentOpt 文件;
             var contentOpt = unzip.file(fullPath).asText();
-            //读取tocNcx 文件;
-            var tocNcx =  unzip.file( _this.toRelativeUrl(OEBPSFolderName +"/toc.ncx") ).asText();
+            //读取tocNcx 文件, tocNcx名字可能不用， 要做特殊处理;
+            var tocName = fullPath.match(/\/(\w+?)\.opf/)[1]  || "";
+            var tocNcx =  "";
+            //toc.ncx这个文件名字不一定对;
+            try{
+                tocNcx = unzip.file( _this.toRelativeUrl(OEBPSFolderName +"/"+ tocName +".ncx") ).asText();
+            }catch(e) {
+                tocNcx = unzip.file( _this.toRelativeUrl(OEBPSFolderName +"/toc.ncx") ).asText();
+            };
+
             var $tocNcx = $(tocNcx);
 
             var contentOptXmlDoc = domParser.parseFromString(contentOpt, 'text/xml');
@@ -100,7 +108,8 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             var getTocEl = function( href ) {
                 var els = $tocNcx.find("content");
                 for(var i=0; i<els.length ; i++ ) {
-                    if(els[i].getAttribute("src") === href) {
+                    //if(els[i].getAttribute("src") === href) {
+                    if( els[i].getAttribute("src").indexOf(href) === 0 ) {
                         return els[i];
                     };
                 };
@@ -112,6 +121,9 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
             var contentArray = [];
             var def = $.Deferred();
             var orginDef = def;
+            /**
+             *  通过spines的顺序 获取目录对应的章节名字和文件路径, 对于多navPoint的Epub文件也能正常处理;
+             */
             $.each($(elSpine).children(), function( contentOpfSpinIndex , itemref ) {
                 var idref = itemref.getAttribute("idref");
                 var href = contentOptXmlDoc.getElementById( idref ).getAttribute("href");
@@ -121,16 +133,12 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                 var nav = getTocEl(href);
                 var navText = "";
                 var content = "";
-
                 if(nav) {
-
                     navText = $(nav).prev("navlabel").text();
-                    //console.log(navText);
-
                     content = unzip.file( _this.toRelativeUrl(OEBPSFolderName+"/"+href)).asText();
-
-                    var $content = $(content);
                     //获取content的image, 并转化为base64的格式;
+                    var domParser = new DOMParser();
+                    var $content = $( domParser.parseFromString(content, 'text/xml').children[0] );
                     var imgs = $content.find("image").add( $content.find("img") );
                     $.each(imgs, function (i,  img ) {
                         //把处理图片的逻辑添加的延迟对象中;
@@ -187,6 +195,7 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                 }catch(e) {
                     _this.dublinCore.setCover("" , $(coverpageHXmlDoc).find("h4").text());
                     console.log("封面图片加载失败");
+                    _def.resolve();
                 };
             });
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
