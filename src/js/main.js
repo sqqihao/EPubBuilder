@@ -5,7 +5,7 @@
  * 主要的main方法， 整个编辑器的初始化和事件的控制， 以及导出等；
  * 左侧的视图， 右侧的可编辑内容；
  * */
-define(["PubData", "EpubBuilder", "Construct/DublinCore", "Construct/Lang"], function(PubData, EpubBuilder, DublinCore, Lang) {
+define(["PubData", "EpubBuilder", "Construct/DublinCore", "model/icon", "Construct/Lang"], function(PubData, EpubBuilder, DublinCore, icon, Lang) {
     var pubData = new PubData("#left-nav","#content-nav");
     var epub = new EpubBuilder();
     var dublinCore  = new DublinCore();
@@ -18,10 +18,10 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore", "Construct/Lang"], fun
 
         //获取目录结构，并合并到data中;
         $.extend(data, dublinCore.getDublinCore());
-        var coverImages =  $("#coverImage").next()[0].files.length && util.isImage($("#coverImage").next()[0].files[0].type);
+        var coverImages =  $("#lang-coverImage").next()[0].files.length && util.isImage($("#lang-coverImage").next()[0].files[0].type);
 
         if( coverImages ) {
-            var file = $("#coverImage").next()[0].files[0];
+            var file = $("#lang-coverImage").next()[0].files[0];
             //判断文件格式是否是image/*
             var fileReader = new FileReader();
             fileReader.readAsDataURL( file );
@@ -31,7 +31,7 @@ define(["PubData", "EpubBuilder", "Construct/DublinCore", "Construct/Lang"], fun
             };
         }else{
             //读取base64 编码的coverimage;
-            data.coverImage = $("#lang-coverImage").attr("base64") || "";
+            data.coverImage = $("#lang-coverImage").attr("base64") || icon.appIcon;
             epub.exportToEpub(data);
         };
 

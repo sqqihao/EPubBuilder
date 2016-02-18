@@ -1,4 +1,4 @@
-define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, PubData, icon ) {
+define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
     
     //压缩成zip的工具:   JSZIP;
     var EpubBuilder = function () {
@@ -264,7 +264,6 @@ define(["Construct/DublinCore", "PubData","model/icon"], function( DublinCore, P
                 publisher : "publisher",
                 description : "description",
                 language : "language",
-                coverImage : icon.appIcon,
                 creator : "creator",
                 author : "author",
                 title : "title",

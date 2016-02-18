@@ -26,7 +26,7 @@
       <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="21" selection-start="5098" selection-end="5098" vertical-scroll-proportion="-1.2857143" vertical-offset="2377" max-vertical-offset="4389">
+            <state line="179" column="79" selection-start="7138" selection-end="7153" vertical-scroll-proportion="-12.214286" vertical-offset="3059" max-vertical-offset="4389">
               <folding />
             </state>
           </provider>
@@ -41,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="20" selection-start="37" selection-end="37" vertical-scroll-proportion="0.028831564" vertical-offset="0" max-vertical-offset="659">
+            <state line="1" column="20" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="152">
               <folding />
             </state>
           </provider>
@@ -59,10 +59,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="18" selection-start="1352" selection-end="1352" vertical-scroll-proportion="0.0" vertical-offset="367" max-vertical-offset="1026">
+            <state line="7" column="58" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0882353" vertical-offset="76" max-vertical-offset="1026">
               <folding />
             </state>
           </provider>
@@ -71,7 +71,7 @@
       <file leaf-file-name="EpubBuilder.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/EpubBuilder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="139" column="36" selection-start="5588" selection-end="5588" vertical-scroll-proportion="0.0" vertical-offset="2394" max-vertical-offset="6213">
+            <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6194">
               <folding />
             </state>
           </provider>
@@ -94,15 +94,15 @@
         <option value="$PROJECT_DIR$/src/css/main.css" />
         <option value="$PROJECT_DIR$/lang/zh-cn.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/lang/i18n.js" />
         <option value="$PROJECT_DIR$/src/js/Construct/Lang.js" />
         <option value="$PROJECT_DIR$/doc/README.MD" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/js/Construct/DublinCore.js" />
-        <option value="$PROJECT_DIR$/src/js/main.js" />
-        <option value="$PROJECT_DIR$/src/js/EpubBuilder.js" />
         <option value="$PROJECT_DIR$/src/js/config.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
+        <option value="$PROJECT_DIR$/src/js/EpubBuilder.js" />
+        <option value="$PROJECT_DIR$/src/js/main.js" />
       </list>
     </option>
   </component>
@@ -446,20 +446,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/Construct/DublinCore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="9" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.0" vertical-offset="367" max-vertical-offset="1026">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="18" selection-start="1352" selection-end="1352" vertical-scroll-proportion="0.0" vertical-offset="367" max-vertical-offset="1026">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://G:/BaiduYunDownload/1Q84（全集）/META-INF/container.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="659">
@@ -467,23 +453,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/EpubBuilder.js">
+    <entry file="file://$PROJECT_DIR$/src/js/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="139" column="36" selection-start="5588" selection-end="5588" vertical-scroll-proportion="0.0" vertical-offset="2394" max-vertical-offset="6213">
+        <state line="1" column="20" selection-start="37" selection-end="37" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="152">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="21" selection-start="5098" selection-end="5098" vertical-scroll-proportion="-1.2857143" vertical-offset="2377" max-vertical-offset="4389">
+        <state line="179" column="79" selection-start="7138" selection-end="7153" vertical-scroll-proportion="-12.214286" vertical-offset="3059" max-vertical-offset="4389">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/config.js">
+    <entry file="file://$PROJECT_DIR$/src/js/Construct/DublinCore.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="20" selection-start="37" selection-end="37" vertical-scroll-proportion="0.028831564" vertical-offset="0" max-vertical-offset="659">
+        <state line="39" column="9" selection-start="1011" selection-end="1011" vertical-scroll-proportion="0.0" vertical-offset="367" max-vertical-offset="1026">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/EpubBuilder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="41" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="6194">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="58" selection-start="181" selection-end="181" vertical-scroll-proportion="0.0882353" vertical-offset="76" max-vertical-offset="1026">
           <folding />
         </state>
       </provider>
