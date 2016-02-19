@@ -43,6 +43,7 @@
     text-align: center;
     padding-top:20px;
     list-style:none;
+    cursor:pointer;
 }
 .left-nav li.active{
     border-color:#00BCD4;

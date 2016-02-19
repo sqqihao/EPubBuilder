@@ -7,7 +7,7 @@ define(function() {
             '<a href="###" class="trash">' +
             '<i class="fa fa-trash"></i>' +
             '</a>' +
-            '<input>' +
+            '<input value="{{this}}">' +
             '</li>',
         "contentTpl" : '<li>' +
             '<div></div>' +

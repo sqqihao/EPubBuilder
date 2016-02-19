@@ -1,4 +1,4 @@
-define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
+define(["Construct/DublinCore"], function( DublinCore ) {
     
     //压缩成zip的工具:   JSZIP;
     var EpubBuilder = function () {
@@ -63,14 +63,14 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
          * @desc 导入epub文件
          * @param {Object} pubData把数据导入到pubdata中;
          * */
-        "importEpub" : function( pubData ) {
+        "importEpub" : function( setData ) {
 
             var _this = this;
             var $input = $("<input type='file' >");
             $input.bind("change", function( ev ) {
                 util.readArrayBuffer( ev.target.files[0]).done(function( arrayBuffer ) {
                     var unzip = JSZip(arrayBuffer);
-                    _this.readEpub( unzip, pubData );
+                    _this.readEpub( unzip, setData );
                 });
             });
             $input.trigger("click");
@@ -80,7 +80,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
         /**
          * @desc 读取epub文件并展示到界面中;
          * */
-        "readEpub" : function ( unzip, pubData ) {
+        "readEpub" : function ( unzip, setData ) {
 
             var _this = this;
             var containerXml = unzip.file("META-INF/container.xml").asText();
@@ -92,7 +92,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             //读取contentOpt 文件;
             var contentOpt = unzip.file(fullPath).asText();
             //读取tocNcx 文件, tocNcx名字可能不用， 要做特殊处理;
-            var tocName = fullPath.match(/\/(\w+?)\.opf/)[1]  || "";
+            var tocName = fullPath.match(/\/?(\w+?)\.opf/)[1]  || "";
             var tocNcx =  "";
             //toc.ncx这个文件名字不一定对;
             try{
@@ -200,7 +200,7 @@ define(["Construct/DublinCore", "PubData"], function( DublinCore, PubData ) {
             });
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
             def.then(function() {
-                pubData.setData(util.clearArray(navArray), util.clearArray(contentArray));
+                setData(util.clearArray(navArray), util.clearArray(contentArray));
             });
             //延迟对象马上开始迭代;
             orginDef.resolve();
