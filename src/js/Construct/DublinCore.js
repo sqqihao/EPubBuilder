@@ -1,5 +1,5 @@
 /**
- * @desc 依赖于jQuery和jQuery.xmlns.js;
+ * @desc 依赖于jQuery;
  * */
 define(["Construct/Lang"], function( LangFn ) {
     /*

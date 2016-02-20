@@ -138,7 +138,9 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                     content = unzip.file( _this.toRelativeUrl(OEBPSFolderName+"/"+href)).asText();
                     //获取content的image, 并转化为base64的格式;
                     var domParser = new DOMParser();
-                    var $content = $( domParser.parseFromString(content, 'text/xml').children[0] );
+                    var $content = $( domParser.parseFromString(content, 'text/html') );
+                    //var $content = $( domParser.parseFromString(content, 'text/xml') ); 如果使用parsexml的方式， 如果标签不合法，会报错;
+                    if($content.find("body").size()) { $content = $content.find("body") };
                     var imgs = $content.find("image").add( $content.find("img") );
                     $.each(imgs, function (i,  img ) {
                         //把处理图片的逻辑添加的延迟对象中;
@@ -177,7 +179,8 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 try{
                     var _def = $.Deferred();
                     var coverpageHtml =unzip.file(OEBPSFolderName+"/Text/coverpage.html").asText() || "";
-                    var coverpageHXmlDoc = domParser.parseFromString(coverpageHtml, 'text/xml');
+                    //var coverpageHXmlDoc = domParser.parseFromString(coverpageHtml, 'text/xml');
+                    var coverpageHXmlDoc = domParser.parseFromString(coverpageHtml, 'text/html');
                     var img = $(coverpageHXmlDoc).find("img");
                     var href = $(img).attr("xlink:href");
                     var src =  $(img).attr("src");
@@ -289,6 +292,13 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                         href : "chapter" + i + ".html"
                     });
                     options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
+                    //对img标签做闭合处理,  比如， 图片是<img src=""> 改成这样<img src=""/>
+                    options.contentArray[i] = options.contentArray[i].replace(/<img [^>]+[^\/](>){1}/gi, function($0,$1,$2){
+                        var obj = $0.split("");
+                        obj.pop()
+                        obj.push("\/\>");
+                        return obj.join("")
+                    })
                     //生成html数据;
                     textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] }));
                 };

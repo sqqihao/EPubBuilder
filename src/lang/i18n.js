@@ -23,7 +23,7 @@ nono.I18N['en'] = {
     "about-title" : "about",
     "create" : "create",
     "downloadEpub" : "downloadEpub",
-    "dc" : "Dublin Core",
+    "dc" : "Dubline Core",
     "state" : "state",
     "stateValue" : "editing",
     "title" : "EpubBuilder",

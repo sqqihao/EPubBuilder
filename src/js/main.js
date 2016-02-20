@@ -41,7 +41,7 @@ define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construc
     titleView.create("");
 
     /**
-     * @desc 获取界面编辑器的数据;
+     * @desc 获取界面编辑器的数据, 作为titleListView和ContntListView的辅助方法;
      * @return {Object} {tocArray:[],  contentArray:[]};
      * */
     function getData() {
@@ -60,7 +60,7 @@ define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construc
     }
 
     /**
-     * @desc 设置数据到view中;
+     * @desc 设置数据到view中, 作为titleListView和ContntListView的辅助方法;
      * @param {Array}, {Array}
      *      [], []
      * @example setData( [1,2,3,4], [11,22,33,44] );
