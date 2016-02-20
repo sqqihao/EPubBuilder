@@ -7,6 +7,7 @@
  * 解压和压缩的实现
  * 主要的main方法， 整个编辑器的初始化和事件的控制， 以及导出等；
  * 左侧的视图， 右侧的可编辑内容；
+ * 约定标题名不能为"封面";
  * */
 define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construct/DublinCore" , "model/icon", "Construct/Lang"], function( TitleList,  ContentList, EpubBuilder , DublinCore, icon, Lang) {
 

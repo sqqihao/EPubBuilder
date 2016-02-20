@@ -97,10 +97,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".jshintrc" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name=".jshintrc" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.jshintrc">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="63" selection-start="307" selection-end="307" vertical-scroll-proportion="0.21077655" vertical-offset="0" max-vertical-offset="855">
+            <state line="7" column="63" selection-start="307" selection-end="307" vertical-scroll-proportion="-4.75" vertical-offset="0" max-vertical-offset="855">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -108,10 +108,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="main.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="114" column="21" selection-start="3157" selection-end="3157" vertical-scroll-proportion="-63.6" vertical-offset="576" max-vertical-offset="2394">
+            <state line="9" column="16" selection-start="197" selection-end="197" vertical-scroll-proportion="0.2753623" vertical-offset="0" max-vertical-offset="2413">
               <folding />
             </state>
           </provider>
@@ -132,7 +132,6 @@
         <option value="$USER_HOME$/Desktop/default (6)/OPS/Text/chapter0.html" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/index.html" />
-        <option value="$PROJECT_DIR$/src/js/main.js" />
         <option value="$PROJECT_DIR$/src/epub/OPS/coverpage.html" />
         <option value="$PROJECT_DIR$/src/js/tpl/tpl.js" />
         <option value="$PROJECT_DIR$/src/js/Construct/TitleList.js" />
@@ -143,6 +142,7 @@
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.travis.yml" />
         <option value="$PROJECT_DIR$/.jshintrc" />
+        <option value="$PROJECT_DIR$/src/js/main.js" />
       </list>
     </option>
   </component>
@@ -236,6 +236,42 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NObuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EPubBuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lang" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NObuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="EPubBuilder" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -373,7 +409,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1552" height="842" extended-state="6" />
+    <frame x="-8" y="-8" width="1552" height="842" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -469,13 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="114" column="21" selection-start="3157" selection-end="3157" vertical-scroll-proportion="-63.6" vertical-offset="576" max-vertical-offset="2394">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/epub/OPS/page.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="0" selection-start="269" selection-end="269" vertical-scroll-proportion="0.36133122" vertical-offset="0" max-vertical-offset="631">
@@ -543,10 +572,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.jshintrc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="63" selection-start="307" selection-end="307" vertical-scroll-proportion="0.21077655" vertical-offset="0" max-vertical-offset="855">
+        <state line="7" column="63" selection-start="307" selection-end="307" vertical-scroll-proportion="-4.75" vertical-offset="0" max-vertical-offset="855">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="16" selection-start="197" selection-end="197" vertical-scroll-proportion="0.2753623" vertical-offset="0" max-vertical-offset="2413">
+          <folding />
         </state>
       </provider>
     </entry>
