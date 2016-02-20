@@ -1,5 +1,5 @@
 ﻿#一款在线的epub格式书籍编辑器
-在线epub书籍的编辑
+在线epub书籍的编辑;
 
 #浏览器支持;
 chrome; firefox; IE9+
@@ -39,6 +39,9 @@ var EBConfig = {
         "lang" : "en"
 };
 ```
+
+#约定
+电子书编辑器中的标题不能随便命名为"封面"， 名字为"封面"的标题只能出现一次;
 
 #演示地址
 [http://sqqihao.github.io/EPubBuilder/src/index.html](http://sqqihao.github.io/EPubBuilder/src/index.html)

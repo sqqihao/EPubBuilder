@@ -1,5 +1,8 @@
 define(function() {
     var template = {
+        "coverTpl" : '<li>' +
+            '<input value="封面" readonly="true"> ' +
+            '</li>',
         "leftTpl" : '<li>' +
             '<a href="###" class="clone">' +
             '<i class="fa fa-clone"></i>' +

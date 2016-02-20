@@ -40,5 +40,8 @@ var EBConfig = {
 };
 ```
 
+#约定
+电子书编辑器中的标题不能随便命名为"封面"， 名字为"封面"的标题只能出现一次;
+
 #演示地址
 [http://sqqihao.github.io/EPubBuilder/src/index.html](http://sqqihao.github.io/EPubBuilder/src/index.html)

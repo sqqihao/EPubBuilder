@@ -16,12 +16,18 @@
     <navMap>
         {{#each this}}
             <navPoint class="{{href}}" id="{{href}}" playOrder="{{@index}}">
-                <navLabel>
-                    <text>
-                        {{name}}
-                    </text>
-                </navLabel>
-                <content src="Text/{{href}}" />
+                <!--
+                    如果是coverpage， 封面页的话， 不生成toc结构;
+                    对封面页的数据进行也是特殊处理， 不让封面的地址出现在toc.ncx， 但是出现在content.opf中;
+                -->
+                {{#unless this.isCoverPage}}
+                    <navLabel>
+                        <text>
+                            {{name}}
+                        </text>
+                        </navLabel>
+                    <content src="Text/{{href}}" />
+                {{/unless}}
             </navPoint>
         {{/each}}
     </navMap>

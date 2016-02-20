@@ -57,6 +57,7 @@ define(["tpl/tpl"],function(tpl) {
                 //(typeof options.index !=="undefined")&&console.log("添加的索引是 ："+ options.index );
                 //console.log("添加一个 ："+ model.get("title") );
                 var li = $( Handlebars.compile(_this.tpl)( model.get("title") ) );
+                if(model.get("title") === "封面") li.find("input").attr("readonly", true).end().find("a").remove();
                 if( typeof options.index !=="undefined" ) {
                     _this.$el.find(".left-nav").children("li").eq( options.index ).before( li );
                 }else{
@@ -133,7 +134,12 @@ define(["tpl/tpl"],function(tpl) {
             if(typeof obj === "string"){
                 val = obj;
                 var arg = (typeof insertIndex ==="number")&&({ at :  insertIndex});
-                this.items.add({ title : val }, arg);
+                //对封面的val进行特殊处理;
+                if( this.items.length === 0  ) {
+                    this.items.add({ title : "封面" }, arg);
+                }else{
+                    this.items.add({ title : val }, arg);
+                };
             }else if($.isArray(obj)) {
                 //如果是数组的话 ， 就迭代自己;
                 $.each(obj, function( valIndex, val) {

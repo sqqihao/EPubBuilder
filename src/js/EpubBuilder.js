@@ -133,47 +133,49 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 var nav = getTocEl(href);
                 var navText = "";
                 var content = "";
-                if(nav) {
-                    navText = $(nav).prev("navlabel").text();
-                    content = unzip.file( _this.toRelativeUrl(OEBPSFolderName+"/"+href)).asText();
-                    //获取content的image, 并转化为base64的格式;
-                    var domParser = new DOMParser();
-                    var $content = $( domParser.parseFromString(content, 'text/html') );
-                    //var $content = $( domParser.parseFromString(content, 'text/xml') ); 如果使用parsexml的方式， 如果标签不合法，会报错;
-                    if($content.find("body").size()) { $content = $content.find("body") };
-                    var imgs = $content.find("image").add( $content.find("img") );
-                    $.each(imgs, function (i,  img ) {
-                        //把处理图片的逻辑添加的延迟对象中;
-                        def = def.then(function() {
-                            var _def = $.Deferred();
-                            var href = $(img).attr("xlink:href");
-                            var src =  $(img).attr("src");
-                            var url = OEBPSFolderName+"/"+dir.join("/")+"/"+ (href || src);
-                            var jpg = unzip.file( _this.toRelativeUrl(url) );
-                            var imageType = _this.getImageType( url );
-                            try{
-                                var oFReader = new FileReader();
-                                oFReader.onload = function (oFREvent) {
-                                    //设置属性;
-                                    $(img).attr("src", oFREvent.target.result );
-                                    _def.resolve();
-                                };
-                                oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
-                            }catch(e) {
+
+                navText = $(nav).prev("navlabel").text();
+                if(!nav&&contentOpfSpinIndex===0)navText="封面";
+
+                content = unzip.file( _this.toRelativeUrl(OEBPSFolderName+"/"+href)).asText();
+                //获取content的image, 并转化为base64的格式;
+                var domParser = new DOMParser();
+                var $content = $( domParser.parseFromString(content, 'text/html') );
+                //var $content = $( domParser.parseFromString(content, 'text/xml') ); 如果使用parsexml的方式， 如果标签不合法，会报错;
+                if($content.find("body").size()) { $content = $content.find("body") };
+                var imgs = $content.find("image").add( $content.find("img") );
+                $.each(imgs, function (i,  img ) {
+                    //把处理图片的逻辑添加的延迟对象中;
+                    def = def.then(function() {
+                        var _def = $.Deferred();
+                        var href = $(img).attr("xlink:href");
+                        var src =  $(img).attr("src");
+                        var url = OEBPSFolderName+"/"+dir.join("/")+"/"+ (href || src);
+                        var jpg = unzip.file( _this.toRelativeUrl(url) );
+                        var imageType = _this.getImageType( url );
+                        try{
+                            var oFReader = new FileReader();
+                            oFReader.onload = function (oFREvent) {
+                                //设置属性;
+                                $(img).attr("src", oFREvent.target.result );
                                 _def.resolve();
                             };
-                            return _def;
-                        });
+                            oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
+                        }catch(e) {
+                            _def.resolve();
+                        };
+                        return _def;
                     });
+                });
 
-                    def.then(function() {
-                        var $divContent =  $("<div>").append($content);
-                        navArray[contentOpfSpinIndex] = navText;
-                        contentArray[contentOpfSpinIndex] =  $divContent.html();
-                    });
-                };
+                def.then(function() {
+                    var $divContent =  $("<div>").append($content);
+                    navArray[contentOpfSpinIndex] = navText;
+                    contentArray[contentOpfSpinIndex] =  $divContent.html();
+                });
+
             });
-
+            /*
             //读取coverpage和coverpage到options;
             def = def.then(function() {
                 try{
@@ -201,9 +203,10 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                     _def.resolve();
                 };
             });
+             */
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
             def.then(function() {
-                setData(util.clearArray(navArray), util.clearArray(contentArray));
+                setData(navArray, contentArray);
             });
             //延迟对象马上开始迭代;
             orginDef.resolve();
@@ -289,7 +292,9 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                     //生成章节数据
                     tocItem.push({
                         name : options.tocArray[i],
-                        href : "chapter" + i + ".html"
+                        href : "chapter" + i + ".html",
+                        //如果页面的标题叫做封面，那么EB就认为， 这个是封面， 不把页面生成到toc.ncx中，但是生成到content.opf当中;
+                        isCoverPage : $.trim(options.tocArray[i]) === "封面"
                     });
                     options.contentArray[i] = this.base64toImage(options.contentArray[i], imagesFolder);
                     //对img标签做闭合处理,  比如， 图片是<img src=""> 改成这样<img src=""/>
@@ -298,7 +303,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                         obj.pop()
                         obj.push("\/\>");
                         return obj.join("")
-                    })
+                    });
                     //生成html数据;
                     textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i] }));
                 };
@@ -314,10 +319,9 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             OPSFolder.file("content.opf", Handlebars.compile(this.contentOpt)({ tocItem : tocItem, options : options}) );
             OPSFolder.file("toc.ncx", Handlebars.compile(this.toc)(tocItem));
 
-            //创建书籍的封面;
+            /*
             options.coverImage = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder);
-            textFolder.file("coverpage.html", Handlebars.compile(this.coverpage)( {options : options}  ));
-
+            */
             var content = zip.generate({type:"blob"});
             // see FileSaver.js
             saveAs(content, options.fileName + '.epub');
