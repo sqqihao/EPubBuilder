@@ -158,6 +158,11 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                             oFReader.onload = function (oFREvent) {
                                 //设置属性;
                                 $(img).attr("src", oFREvent.target.result );
+                                //对svg中的image做特殊处理 , 这本书#Rabbit, Run.epub#;
+                                if($(img).closest("svg").size()) {
+                                    $(img).attr("xlink:href",oFREvent.target.result)
+                                    $(img).attr("src","");
+                                };
                                 _def.resolve();
                             };
                             oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
@@ -229,8 +234,12 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 if( imageType ) {
                     var uuid = util.uuid()+"."+imageType;
                     zipImageFolder.file(  uuid , dataUrl  , {base64: true});
-                    //$(e).attr("xlink:href",  "images/"+uuid);
                     $(e).attr("src", "../Images/"+uuid );
+                    //对svg中的image做特殊处理 , 这本书#Rabbit, Run.epub#;
+                    if($(e).closest("svg").size()) {
+                        $(e).attr("xlink:href",  "../images/"+uuid);
+                        $(e).attr("src", "" );
+                    };
                     //百度编辑器会设置一个_src属性和src一样； src如果为base64的话， 文件会很大;
                     $(e).attr("_src","");
                 };
