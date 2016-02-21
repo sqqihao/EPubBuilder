@@ -26,6 +26,21 @@
 }
 
 /**
+    header的一些按钮和字体样式---start
+*/
+.title{
+    margin-top: 6px;
+    font-weight: bold;
+}
+.lang-preview{
+    margin-top: 6px;
+    margin-right: 4px;
+}
+/**
+    header的一些按钮和字体样式---start
+*/
+
+/**
 左侧分页导航栏
 */
 #left-nav{
@@ -93,4 +108,114 @@ ul.ui-list li a.btn{
 }
 .content-nav li.active .edui-container{
     border-color:#00BCD4
+}
+
+/**
+toggle.css
+*/
+
+.toggle {
+    background-color: #8AB9E3;
+    border-radius: 60px;
+    color: white;
+    height: 29px;
+    margin: 5px 12px 12px 0;
+    overflow: hidden;
+    *zoom: 1;
+    display: inline-block;
+    zoom: 1;
+    *display: inline;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden;
+    -webkit-box-sizing: initial;
+    cursor: pointer;
+}
+
+.toggle:before, .toggle:after {
+    display: table;
+    content: "";
+}
+
+.toggle:after {
+    clear: both;
+}
+
+.toggle.toggle-off {
+    background-color: #cbd2d8;
+}
+
+.toggle.toggle-off .toggle-radio {
+    background-image: url("../images/icon-off.png");
+    background-position: 0 0;
+    color: white;
+    left: 0;
+    margin-left: 0.5px;
+    margin-right: -13px;
+    z-index: 1;
+}
+
+.toggle.toggle-off .toggle-radio:first-child {
+    left: -120%;
+}
+
+.toggle .toggle-radio {
+    background: url("../images/icon-on.png") right top no-repeat;
+    color: #0275d8;
+    display: block;
+    font-weight: 700;
+    height: 21px;
+    left: 120%;
+    margin-left: -13px;
+    padding: 5px 32px 3px;
+    position: relative;
+    text-align: center;
+    z-index: 2;
+    -webkit-transition: 0.25s;
+    -moz-transition: 0.25s;
+    -o-transition: 0.25s;
+    transition: 0.25s;
+    -webkit-backface-visibility: hidden;
+}
+
+.toggle .toggle-radio:first-child {
+    margin-bottom: -29px;
+    left: 0;
+}
+
+.toggle input {
+    display: none;
+    position: absolute;
+    outline: none !important;
+    display: block\9;
+    opacity: 0.01;
+    filter: alpha(opacity=1);
+    zoom: 1;
+}
+
+.toggle.toggle-icon {
+    border-radius: 6px 7px 7px 6px;
+}
+
+.toggle.toggle-icon.toggle-off {
+    border-radius: 7px 6px 6px 7px;
+}
+
+.toggle.toggle-icon.toggle-off .toggle-radio {
+    background-image: url("../images/block-off.png");
+    background-position: 0 0;
+}
+
+.toggle.toggle-icon .toggle-radio {
+    background-image: url("../images/block-on.png");
+    background-position: 62px 0;
+    border-radius: 6px;
+    min-width: 27px;
+    text-align: right;
+}
+
+.toggle.toggle-icon .toggle-radio:first-child {
+    text-align: left;
 }

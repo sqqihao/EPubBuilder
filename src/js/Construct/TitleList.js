@@ -57,7 +57,7 @@ define(["tpl/tpl"],function(tpl) {
                 //(typeof options.index !=="undefined")&&console.log("添加的索引是 ："+ options.index );
                 //console.log("添加一个 ："+ model.get("title") );
                 var li = $( Handlebars.compile(_this.tpl)( model.get("title") ) );
-                if(model.get("title") === "封面") li.find("input").attr("readonly", true).end().find("a").remove();
+                if(model.get("title") === "封面") li.find("input").bind("focus", function() { this.blur() }).end().find("a").remove();
                 if( typeof options.index !=="undefined" ) {
                     _this.$el.find(".left-nav").children("li").eq( options.index ).before( li );
                 }else{

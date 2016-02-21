@@ -9,7 +9,7 @@
  * 左侧的视图， 右侧的可编辑内容；
  * 约定标题名不能为"封面";
  * */
-define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construct/DublinCore" , "model/icon", "Construct/Lang"], function( TitleList,  ContentList, EpubBuilder , DublinCore, icon, Lang) {
+define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construct/DublinCore", "Construct/Preview" , "Construct/Lang"], function( TitleList,  ContentList, EpubBuilder , DublinCore, Preview, Lang) {
 
     var epub = new EpubBuilder();
 
@@ -90,25 +90,8 @@ define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construc
         //获取目录结构，并合并到data中;
         $.extend(data, dublinCore.getDublinCore());
 
-
         epub.exportToEpub(data);
-        /*
-        var coverImages =  $("#lang-coverImage").next()[0].files.length && util.isImage($("#lang-coverImage").next()[0].files[0].type);
 
-        if( coverImages ) {
-            var file = $("#lang-coverImage").next()[0].files[0];
-            //判断文件格式是否是image*//*
-            var fileReader = new FileReader();
-            fileReader.readAsDataURL( file );
-            fileReader.onload = function () {
-                data.coverImage = arguments[0].target.result;
-            };
-        }else{
-            //读取base64 编码的coverimage;
-            data.coverImage = $("#lang-coverImage").attr("base64") || icon.appIcon;
-            epub.exportToEpub(data);
-        };
-        */
     });
 
     $("#open").click(function() {
@@ -119,4 +102,6 @@ define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construc
 
     //初始化默认语言;
     new Lang().init();
+
+    new Preview();
 });
