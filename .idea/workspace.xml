@@ -22,7 +22,17 @@
     <favorites_list name="NObuilder" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="101" column="25" selection-start="3499" selection-end="3499" vertical-scroll-proportion="0.17656766" vertical-offset="1812" max-vertical-offset="4446">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -40,7 +50,6 @@
         <option value="$PROJECT_DIR$/src/third/umeditor/dist/umeditor.min.js" />
         <option value="$PROJECT_DIR$/src/js/main.js" />
         <option value="$PROJECT_DIR$/src/js/Construct/TitleList.js" />
-        <option value="$PROJECT_DIR$/src/index.html" />
         <option value="$PROJECT_DIR$/src/css/common.css" />
         <option value="$PROJECT_DIR$/src/css/main.css" />
         <option value="$PROJECT_DIR$/src/js/EpubBuilder.js" />
@@ -48,6 +57,7 @@
         <option value="$PROJECT_DIR$/src/js/Construct/Preview.js" />
         <option value="$PROJECT_DIR$/src/js/Construct/Lang.js" />
         <option value="$PROJECT_DIR$/src/js/config.js" />
+        <option value="$PROJECT_DIR$/src/index.html" />
       </list>
     </option>
   </component>
@@ -111,7 +121,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -154,70 +163,13 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="third" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NObuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EPubBuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lang" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NObuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EPubBuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="NObuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="EPubBuilder" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="epubs" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -337,13 +289,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1552" height="842" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295082" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24983476" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21877065" sideWeight="0.7798834" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.14672835" sideWeight="0.7798834" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32798833" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -419,84 +371,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/third/umeditor/dist/umeditor.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="234" column="187" selection-start="123982" selection-end="123982" vertical-scroll-proportion="0.42512077" vertical-offset="4182" max-vertical-offset="5130">
-          <folding />
-        </state>
+        <state line="234" column="187" selection-start="123982" selection-end="123982" vertical-scroll-proportion="0.42512077" vertical-offset="4182" max-vertical-offset="5130" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/Construct/ContentList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="60" selection-start="1667" selection-end="1667" vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="1406">
-          <folding />
-        </state>
+        <state line="61" column="60" selection-start="1667" selection-end="1667" vertical-scroll-proportion="0.0" vertical-offset="741" max-vertical-offset="1406" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/Construct/TitleList.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="104" selection-start="1637" selection-end="1637" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3040">
-          <folding />
-        </state>
+        <state line="59" column="104" selection-start="1637" selection-end="1637" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3040" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/css/common.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1159">
-          <folding />
-        </state>
+        <state line="9" column="0" selection-start="92" selection-end="92" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1159" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/css/main.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="18" selection-start="859" selection-end="859" vertical-scroll-proportion="0.46130502" vertical-offset="874" max-vertical-offset="4351">
-          <folding />
-        </state>
+        <state line="62" column="18" selection-start="859" selection-end="859" vertical-scroll-proportion="0.46130502" vertical-offset="874" max-vertical-offset="4351" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="105" column="18" selection-start="2578" selection-end="2578" vertical-scroll-proportion="1.4613003" vertical-offset="1051" max-vertical-offset="2128">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="138" column="57" selection-start="5271" selection-end="5271" vertical-scroll-proportion="-3.8214285" vertical-offset="2515" max-vertical-offset="4560">
-          <folding />
-        </state>
+        <state line="105" column="18" selection-start="2578" selection-end="2578" vertical-scroll-proportion="1.4613003" vertical-offset="1051" max-vertical-offset="2128" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/EpubBuilder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="264" column="0" selection-start="10792" selection-end="10792" vertical-scroll-proportion="0.0" vertical-offset="5415" max-vertical-offset="6099">
-          <folding />
-        </state>
+        <state line="264" column="0" selection-start="10792" selection-end="10792" vertical-scroll-proportion="0.0" vertical-offset="5415" max-vertical-offset="6099" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/lang/i18n.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="15" selection-start="270" selection-end="280" vertical-scroll-proportion="0.33687404" vertical-offset="25" max-vertical-offset="703">
-          <folding />
-        </state>
+        <state line="13" column="15" selection-start="270" selection-end="280" vertical-scroll-proportion="0.33687404" vertical-offset="25" max-vertical-offset="703" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/Construct/Preview.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="24" selection-start="1784" selection-end="1784" vertical-scroll-proportion="0.69195753" vertical-offset="627" max-vertical-offset="1387">
-          <folding />
-        </state>
+        <state line="57" column="24" selection-start="1784" selection-end="1784" vertical-scroll-proportion="0.69195753" vertical-offset="627" max-vertical-offset="1387" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/Construct/Lang.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="85" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="950">
-          <folding />
-        </state>
+        <state line="28" column="85" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="237" max-vertical-offset="950" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/js/config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="17" selection-start="34" selection-end="34" vertical-scroll-proportion="0.028831564" vertical-offset="0" max-vertical-offset="659">
+        <state line="1" column="17" selection-start="34" selection-end="34" vertical-scroll-proportion="0.028831564" vertical-offset="0" max-vertical-offset="659" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="25" selection-start="3499" selection-end="3499" vertical-scroll-proportion="0.17656766" vertical-offset="1812" max-vertical-offset="4446">
           <folding />
         </state>
       </provider>
