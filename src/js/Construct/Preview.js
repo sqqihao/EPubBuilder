@@ -1,8 +1,8 @@
 /**
  * Created by nono on 16-2-21.
  */
-define(function() {
-
+define(["Construct/Lang"], function( Lang ) {
+    var lang = new Lang();
     var Preview = function() {
 
         /**
@@ -49,11 +49,13 @@ define(function() {
             radio.eq(0).click(function() {
                 $(toggle).toggleClass("toggle-off");
                 setEnabled();
+                lang.setState(true);
             });
 
             radio.eq(1).click(function() {
                 $(toggle).toggleClass("toggle-off");
                 setDisabled();
+                lang.setState(false);
             });
         };
         $(".toggle").each(function(index, toggle) {

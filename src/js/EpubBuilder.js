@@ -180,35 +180,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 });
 
             });
-            /*
-            //读取coverpage和coverpage到options;
-            def = def.then(function() {
-                try{
-                    var _def = $.Deferred();
-                    var coverpageHtml =unzip.file(OEBPSFolderName+"/Text/coverpage.html").asText() || "";
-                    //var coverpageHXmlDoc = domParser.parseFromString(coverpageHtml, 'text/xml');
-                    var coverpageHXmlDoc = domParser.parseFromString(coverpageHtml, 'text/html');
-                    var img = $(coverpageHXmlDoc).find("img");
-                    var href = $(img).attr("xlink:href");
-                    var src =  $(img).attr("src");
-                    var url =  href || src;
-                    var imageType = _this.getImageType( url );
-                    var jpg = unzip.file( _this.toRelativeUrl(_this.toRelativeUrl(OEBPSFolderName+"/Text/"+url)) );
-                        var oFReader = new FileReader();
-                        oFReader.onload = function (oFREvent) {
-                            //设置属性;
-                            _this.dublinCore.setCover(oFREvent.target.result , $(coverpageHXmlDoc).find("h4").text());
-                            _def.resolve();
-                        };
-                        oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
-                    return _def;
-                }catch(e) {
-                    _this.dublinCore.setCover("" , $(coverpageHXmlDoc).find("h4").text());
-                    console.log("封面图片加载失败");
-                    _def.resolve();
-                };
-            });
-             */
+
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
             def.then(function() {
                 setData(navArray, contentArray);
@@ -234,7 +206,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 if( imageType ) {
                     var uuid = util.uuid()+"."+imageType;
                     zipImageFolder.file(  uuid , dataUrl  , {base64: true});
-                    $(e).attr("src", "../Images/"+uuid );
+                    $(e).attr("src", "../images/"+uuid );
                     //对svg中的image做特殊处理 , 这本书#Rabbit, Run.epub#;
                     if($(e).closest("svg").size()) {
                         $(e).attr("xlink:href",  "../images/"+uuid);
@@ -288,7 +260,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
 
             var zip = new JSZip();
             var OPSFolder = zip.folder("OPS");
-            var imagesFolder = OPSFolder.folder("Images");
+            var imagesFolder = OPSFolder.folder("images");
             var textFolder = OPSFolder.folder("Text");
 
             //循环contentArray和tocArray， 生成html字符串

@@ -60,6 +60,9 @@
     list-style:none;
     cursor:pointer;
 }
+.left-nav li:hover{
+    background: #F6FDFF;
+}
 .left-nav li.active{
     border-color:#00BCD4;
 }

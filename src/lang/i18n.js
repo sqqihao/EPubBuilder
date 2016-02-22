@@ -11,7 +11,7 @@ nono.I18N['zh-cn'] = {
     "downloadEpub" : "下载电子书",
     "dc" : "柏林核心",
     "state" : "状态",
-    "stateValue" : "编辑",
+    "stateValue" : ["编辑","预览"],
     "title" : "EpubBuilder编辑器",
     "preview" : "预览"
 };
@@ -25,7 +25,7 @@ nono.I18N['en'] = {
     "downloadEpub" : "downloadEpub",
     "dc" : "Dubline Core",
     "state" : "state",
-    "stateValue" : "editing",
+    "stateValue" : ["editing","preview"],
     "title" : "EpubBuilder",
     "coverImage" : "selected",
     "preview" : "preview"
