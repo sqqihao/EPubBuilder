@@ -105,6 +105,9 @@ ul.ui-list li a.btn{
 }
 
 
+#content-nav li{
+    list-style: none;
+}
 .content-nav li{
     padding-top:20px;
     list-style: none;
