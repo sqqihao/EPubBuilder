@@ -104,10 +104,11 @@ ul.ui-list li a.btn{
     padding:0em 1rem!important;
 }
 
-
+#content-nav li{
+    list-style: none;
+}
 .content-nav li{
     padding-top:20px;
-    list-style: none;
 }
 .content-nav li.active .edui-container{
     border-color:#00BCD4
