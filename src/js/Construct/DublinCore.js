@@ -16,9 +16,13 @@ define(["Construct/Lang"], function( LangFn ) {
      * */
     Toc.prototype.getDublinCore = function () {
         var data = {};
-        $.each($(".export-div form").serializeArray(),function(i,e) {
+        $.each($(".export-div form").serializeArray(), function(i,e) {
             e.value&&(data[ e.name ] = e.value);
         });
+
+        var form = $(".export-div form");
+        var _value = form.find("input[name=coverImage]").attr("coverImage" );
+        _value&&(data[ "coverImage" ] = _value);
         return data;
     };
 
@@ -38,11 +42,10 @@ define(["Construct/Lang"], function( LangFn ) {
     /**
      * @desc 设置电子书的描述和书籍封面图;
      * */
-    Toc.prototype.setCover = function(base64, desc) {
+    Toc.prototype.setCover = function(base64) {
         var form = $(".export-div form");
-        form.find("[name=coverpage]").val( desc );
-        $("#lang-coverImage").attr("base64", base64);
-        !!base64&&$("#lang-coverImage").text( langFn.getProperty("coverImage") );
+        form.find("input[name=coverImage]").attr("coverImage", base64 );
+        !!base64&&$("#coverImage").text( langFn.getProperty("coverImage") );
     }
 
     return Toc;

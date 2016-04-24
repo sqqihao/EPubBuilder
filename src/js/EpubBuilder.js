@@ -117,6 +117,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
 
             //设置dublinCore
             this.dublinCore.setDublinCore(contentOptXmlDoc);
+            //$(contentOptXmlDoc).find("#"+$(contentOptXmlDoc).find("meta[name*=cover]").attr("content")).attr("href");
             var navArray = [];
             var contentArray = [];
             var def = $.Deferred();
@@ -181,6 +182,28 @@ define(["Construct/DublinCore"], function( DublinCore ) {
 
             });
 
+            //读取coverpage和coverpage到options;
+            def = def.then(function() {
+                var _def = $.Deferred();
+                try{
+                    //找到cover背景图片的item, 因为不规范, 所以要处理多种情况;
+                    var url =  $(contentOptXmlDoc).find("item[id*="+$(contentOptXmlDoc).find("meta[name*=cover]").attr("content").split(".")[0]+"]").attr("href");
+                    var imageType = _this.getImageType( url );
+                    var jpg = unzip.file( _this.toRelativeUrl(_this.toRelativeUrl(OEBPSFolderName+"/"+url)) );
+                    var oFReader = new FileReader();
+                    oFReader.onload = function (oFREvent) {
+                        //设置属性;
+                        _this.dublinCore.setCover( oFREvent.target.result );
+                        _def.resolve();
+                    };
+                    oFReader.readAsDataURL(new Blob([jpg.asArrayBuffer()], {type : 'image/'+imageType}));
+                    return _def;
+                }catch(e) {
+                    _this.dublinCore.setCover("");
+                    console.log("封面图片加载失败");
+                    _def.resolve();
+                };
+            });
             //最后， 当所有的数据处理成字符串以后， 把数据灌入view;
             def.then(function() {
                 setData(navArray, contentArray);
@@ -255,7 +278,8 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 author : "author",
                 title : "title",
                 contributor : "contributor",
-                ISBN : "xxxx-xxxx"
+                ISBN : "xxxx-xxxx",
+                coverImage : ""
             }, options);
 
             var zip = new JSZip();
@@ -295,6 +319,17 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             var MeTaFolder = zip.folder("META-INF");
             MeTaFolder.file("container.xml", this.container);
             zip.file("mimetype", this.mimetype);
+
+            //防止创建书籍的封面时意外的发生;
+            try{
+                //创建书籍的封面;
+                if(options.coverImage.length) {
+                    var imgSrc = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder) ;
+                    options.coverImage = imgSrc.match(/src=\"\.\.([^"]*)"/)[1];;
+                };
+            }catch(e) {
+                options.coverImage = "";
+            }
 
             //生成toc和opt文件
             OPSFolder.file("content.opf", Handlebars.compile(this.contentOpt)({ tocItem : tocItem, options : options}) );

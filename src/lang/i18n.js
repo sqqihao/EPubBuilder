@@ -13,7 +13,8 @@ nono.I18N['zh-cn'] = {
     "state" : "状态",
     "stateValue" : ["编辑","预览"],
     "title" : "EpubBuilder编辑器",
-    "preview" : "预览"
+    "preview" : "预览",
+    "coverImage" : "已选择"
 };
 
 nono.I18N['en'] = {

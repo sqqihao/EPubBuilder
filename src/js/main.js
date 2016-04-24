@@ -81,6 +81,19 @@ define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construc
         });
     }
 
+    $("input[name*=coverImage]").change(function() {
+        var _this = this;
+        if( util.isImage(_this.files[0].type) ) {
+            var file = _this.files[0];
+            //判断文件格式是否是image/*
+            var fileReader = new FileReader();
+            fileReader.readAsDataURL( file );
+            fileReader.onload = function () {
+                $(_this).attr("coverImage", arguments[0].target.result);
+            };
+        }
+    });
+
     $("#build").bind("click", function( ev ) {
 
         var data = getData();
