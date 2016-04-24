@@ -11,12 +11,16 @@
         <dc:date xmlns:dc="http://purl.org/dc/elements/1.1/">{{options.date}}</dc:date>
         <dc:contributor opf:role="bkp" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">{{options.contributor}}</dc:contributor>
         <dc:identifier opf:scheme="ISBN" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:opf="http://www.idpf.org/2007/opf">{{options.ISBN}}</dc:identifier>
+        {{#if options.coverImage}}
+            <meta name="cover" content="cover"/>
+        {{/if}}
+        <meta name="EpubBuilder" content="0.0.1"/>
     </metadata>
         <manifest>
             <!-- Content Documents -->
             <item id="ncx" href="toc.ncx" media-type="application/x-dtbncx+xml" />
             <item id="css" href="css/main.css" media-type="text/css" />
-            <item id="cover-image" href="{{options.coverImage}}" media-type="image/jpeg"/>
+            <item id="cover" href="{{options.coverImage}}" media-type="image/*"/>
             {{#each tocItem}}
                 <item id="{{href}}" href="Text/{{href}}" media-type="application/xhtml+xml"/>
             {{/each}}
