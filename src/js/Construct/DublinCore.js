@@ -20,6 +20,7 @@ define(["Construct/Lang"], function( LangFn ) {
             e.value&&(data[ e.name ] = e.value);
         });
 
+        //对书籍封面进行特殊处理
         var form = $(".export-div form");
         var _value = form.find("input[name=coverImage]").attr("coverImage" );
         _value&&(data[ "coverImage" ] = _value);
@@ -40,12 +41,11 @@ define(["Construct/Lang"], function( LangFn ) {
     };
 
     /**
-     * @desc 设置电子书的描述和书籍封面图;
+     * @desc 设置电子书的书籍封面;
      * */
     Toc.prototype.setCover = function(base64) {
         var form = $(".export-div form");
         form.find("input[name=coverImage]").attr("coverImage", base64 );
-        !!base64&&$("#coverImage").text( langFn.getProperty("coverImage") );
     }
 
     return Toc;
