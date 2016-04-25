@@ -258,6 +258,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
          *       @param {Array} tocArray
          *       @param {Array} contentArray
          *       @param {String} name
+         * @desc 因为有很多电子书的内部文档结构没有按照标准走, 可能导致一些加载失败的问题, 在EpubBuilder导出的epub文件已对所有的文件目录进行统一的规划;
          * */
         "exportToEpub" : function ( options ) {
             options = $.extend({
@@ -320,10 +321,11 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             MeTaFolder.file("container.xml", this.container);
             zip.file("mimetype", this.mimetype);
 
-            //防止创建书籍的封面时意外的发生;
+            //防止创建书籍封面时意外的发生;
             try{
                 //创建书籍的封面;
                 if(options.coverImage.length) {
+                    //生成缩略图图片, 并把生成的图片的地址获取到;
                     var imgSrc = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder) ;
                     options.coverImage = imgSrc.match(/src=\"\.\.([^"]*)"/)[1];;
                 };
