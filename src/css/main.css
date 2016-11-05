@@ -89,6 +89,10 @@
     margin: 20px auto;
 }
 
+.left-nav button{
+    margin-top:10px;
+}
+
 /**
 控件栏
 */
