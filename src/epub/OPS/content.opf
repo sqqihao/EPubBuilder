@@ -28,9 +28,10 @@
             {{/if}}
         </manifest>
         <spine toc="ncx">
-            {{#if options.coverImage}}
+        <!--- {{#if options.coverImage}}
                 <itemref idref="coverpage" linear="yes" />
             {{/if}}
+        -->
             {{#each tocItem}}
                 <itemref idref="{{href}}" linear="yes" />
             {{/each}}

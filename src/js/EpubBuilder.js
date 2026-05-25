@@ -201,9 +201,14 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 });
 
                 def.then(function() {
-                    var $divContent =  $("<div>").append($content);
+                    var $divContent = $("<div>").append($content);
+                    var html = $divContent.html();
+                    // 删除嵌入在 body 里的 XML 声明（从 readEpub 解析时带进来的）
+                    html = html.replace(/<\/?xml[^>]*>/gi, '');
+                    // 删除嵌入在 body 里的 <link> CSS 引用（CSS 已在 page.html 的 <head> 里，manifest 注册的是 css/main.css）
+                    html = html.replace(/<\/?link[^>]*>/gi, '');
                     navArray[contentOpfSpinIndex] = navText;
-                    contentArray[contentOpfSpinIndex] =  $divContent.html();
+                    contentArray[contentOpfSpinIndex] = html;
                 });
 
             });
@@ -390,12 +395,34 @@ define(["Construct/DublinCore"], function( DublinCore ) {
 
                 try{
                     for(var i=0; i< chapterLength; i++) {
+                        // 提取二级目录：从 content 中解析 h2/h3 标签生成子章节
+                        var children = [];
+                        var rawContentForParse = options.contentArray[i] || "";
+                        // 提取 h2/h3 子标题（处理各种格式）
+                        var headingMatches = rawContentForParse.match(/<h([23])[^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h\1>/gi) || [];
+                        for (var hi = 0; hi < headingMatches.length; hi++) {
+                            var m = headingMatches[hi].match(/<h[23][^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h[23]>/i);
+                            if (m && m[1] && m[2]) {
+                                // 清理 HTML 标签获取纯文本
+                                var text = m[2].replace(/<[^>]+>/g, "").replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").trim();
+                                if (text.length > 0) {
+                                    children.push({
+                                        name: text,
+                                        href: "chapter" + i + ".html",
+                                        anchor: m[1],
+                                        playOrder: i * 100 + children.length
+                                    });
+                                }
+                            }
+                        }
                         //生成章节数据
                         tocItem.push({
-                            name : options.tocArray[i],
-                            href : "chapter" + i + ".html",
+                            name : options.tocArray[i].replace(/^\s+|\s+$/g, ''),
+                            href : i === 0 ? "coverpage.html" : "chapter" + i + ".html",
+                            playOrder: i,
                             //如果页面的标题叫做封面，那么EB就认为， 这个是封面， 不把页面生成到toc.ncx中，但是生成到content.opf当中;
-                            isCoverPage : $.trim(options.tocArray[i]) === "封面"
+                            isCoverPage : $.trim(options.tocArray[i]) === "封面",
+                            children: children.length > 0 ? children : null
                         });
                         var result = this.base64toImage(options.contentArray[i], imagesFolder);
                         options.contentArray[i] = result[0];
@@ -407,13 +434,26 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                         rawContent = rawContent.replace(/<\/?html[^>]*>/gi, '');
                         rawContent = rawContent.replace(/<\/?head[^>]*>/gi, '');
                         rawContent = rawContent.replace(/<\/?body[^>]*>/gi, '');
+                        // 删除嵌入在 body 里的 XML 声明（从 readEpub 解析时带进来的）
+                        rawContent = rawContent.replace(/<\/?xml[^>]*>/gi, '');
+                        // 删除嵌入在 body 里的 <link> CSS 引用（CSS 已在 page.html 的 <head> 里，manifest 注册的是 css/main.css）
+                        rawContent = rawContent.replace(/<\/?link[^>]*>/gi, '');
                         // 对所有自闭合标签做规范化：<br> → <br/>、<br/><br/> → <br/>、<br class="x"/> → <br class="x"/>
                         // 避免苹果 Books 的 XML 解析器将 <br> 当作未闭合标签，导致 "Opening and ending tag mismatch: br line 11 and div"
                         rawContent = rawContent.replace(/<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)([^>]*?)>/gi, function(match, tag, attrs) {
                             return '<' + tag + attrs + '/>';
                         });
+                        // 将 content 中的绝对 URL 链接替换为相对路径（chapterN.html#anchor）
+                        rawContent = rawContent.replace(/href=["']http:\/\/chapter(\d+)\.html#([^"']+)["']/gi, function(match, num, anchor) {
+                            return 'href="chapter' + (parseInt(num) + 1) + '.html#' + anchor + '"';
+                        });
+                        rawContent = rawContent.replace(/href=["']http:\/\/chapter(\d+)\.html["']/gi, function(match, num) {
+                            return 'href="chapter' + (parseInt(num) + 1) + '.html"';
+                        });
+                        // 删除空白的 h2/h3 标签（只有空白文字的标题）
+                        rawContent = rawContent.replace(/<h[23][^>]*>\s*<\/h[23]>/gi, '');
                         //生成html数据;
-                        textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : rawContent, options: options }));
+                        textFolder.file(i==0?"coverpage.html":"chapter" + i + ".html", Handlebars.compile(this.page)({ body : rawContent, options: options }));
                     }
                 } catch(e) {
                     console.error("章节内容处理失败:", e);
@@ -448,10 +488,11 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 options.coverImage = "";
             }
 
-            //生成toc和opt文件
+            /*
             if (options.coverImage.length) {
                 textFolder.file("coverpage.html", Handlebars.compile(this.coverpage)({ options: options }));
             }
+            */
             // 生成 content.opf 之前，注入图片 manifest 条目
             var imageManifestHtml = "";
             // deduplicate + 生成 manifest item 标签
@@ -471,12 +512,31 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             // 在 content.opf 的 </manifest> 之前注入图片条目
             var compiledContentOpf = Handlebars.compile(this.contentOpt)({ tocItem : tocItem, options : options });
             compiledContentOpf = compiledContentOpf.replace(/(<\/manifest>)/, imageManifestHtml + "\n        $1");
+            
+            // 添加 guide 引用（导航页跳转支持）
+            // 找到目录页（chapter3.html，即第4个章节，索引为3）
+            var tocIndex = -1;
+            for (var ti = 0; ti < tocItem.length; ti++) {
+                if (tocItem[ti].name && tocItem[ti].name.indexOf("目录") !== -1) {
+                    tocIndex = ti;
+                    break;
+                }
+            }
+            if (tocIndex === -1 && tocItem.length >= 4) {
+                tocIndex = 3; // 默认第4个章节为目录页
+            }
+            var guideHtml = "";
+            if (tocIndex >= 0 && tocItem[tocIndex]) {
+                guideHtml = '\n    <reference type="toc" href="Text/' + tocItem[tocIndex].href + '" title="目录"/>';
+            }
+            compiledContentOpf = compiledContentOpf.replace(/(<\/guide>)/, guideHtml + "\n    $1");
+            
             OPSFolder.file("content.opf", compiledContentOpf);
             OPSFolder.file("toc.ncx", Handlebars.compile(this.tocTemplate)({ title: options.title, author: options.author, tocItem: tocItem }));
 
-            /*
+            
             options.coverImage = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder);
-            */
+            
             var content = zip.generate({type:"blob"});
             // see FileSaver.js
             saveAs(content, options.fileName + '.epub');

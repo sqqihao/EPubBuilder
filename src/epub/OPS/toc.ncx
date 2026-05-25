@@ -15,7 +15,7 @@
     </docAuthor>
     <navMap>
         {{#each tocItem}}
-            <navPoint class="{{href}}" id="{{href}}" playOrder="{{@index}}">
+            <navPoint class="{{href}}" id="{{href}}" playOrder="{{playOrder}}">
                 <!--
                     如果是coverpage， 封面页的话， 不生成toc结构;
                     对封面页的数据进行也是特殊处理， 不让封面的地址出现在toc.ncx， 但是出现在content.opf中;
@@ -27,6 +27,18 @@
                         </text>
                         </navLabel>
                     <content src="Text/{{href}}" />
+                    {{#if this.children}}
+                    <navPoint class="{{href}}" id="{{href}}_nested" playOrder="{{playOrder}}">
+                        {{#each this.children}}
+                            <navPoint class="{{../href}}" id="{{href}}" playOrder="{{playOrder}}">
+                                <navLabel>
+                                    <text>{{name}}</text>
+                                </navLabel>
+                                <content src="Text/{{../href}}#{{anchor}}" />
+                            </navPoint>
+                        {{/each}}
+                    </navPoint>
+                    {{/if}}
                 {{/unless}}
             </navPoint>
         {{/each}}
