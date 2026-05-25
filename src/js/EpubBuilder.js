@@ -9,23 +9,23 @@ define(["Construct/DublinCore"], function( DublinCore ) {
     $.extend(EpubBuilder.prototype, {
         "init" : function () {
             var _this = this;
-            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/mimetype", "success":function(data) {
+            $.ajax({async:false, type:"get", dataType :"text" ,url:"./epub/mimetype", "success":function(data) {
                 _this.mimetype = data;
             }});
-            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/META-INF/container.xml", "success":function(data) {
+            $.ajax({async:false, type:"get", dataType :"text" ,url:"./epub/META-INF/container.xml", "success":function(data) {
                 _this.container = data;
             }});
-            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/toc.ncx", "success":function(data) {
+            $.ajax({async:false, type:"get", dataType :"text" ,url:"./epub/OPS/toc.ncx", "success":function(data) {
                 _this.toc = data;
-                _this.tocTemplate = data;  // 保存原始模板，导入操作会覆盖 this.toc
+                _this.tocTemplate = data;
             }});
-            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/content.opf", "success":function(data) {
+            $.ajax({async:false, type:"get", dataType :"text" ,url:"./epub/OPS/content.opf", "success":function(data) {
                 _this.contentOpt = data;
             }});
-            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/coverpage.html", "success":function(data) {
+            $.ajax({async:false, type:"get", dataType :"text" ,url:"./epub/OPS/coverpage.html", "success":function(data) {
                 _this.coverpage = data;
             }});
-            $.ajax({async:false, type:"get", dataType : "text" ,url:"./epub/OPS/page.html", "success":function(data) {
+            $.ajax({async:false, type:"get", dataType :"text" ,url:"./epub/OPS/page.html", "success":function(data) {
                 _this.page = data;
             }});
         },
@@ -342,6 +342,17 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                 });
             }
 
+            // 转义 Handlebars 分隔符，防止 {{xxx}} 被模板引擎误解析
+            var esc = function(s) {
+                if (!s) return "";
+                return s.replace(/\{\{/g, '\u200B{{').replace(/\}\}/g, '}}\u200B');
+            };
+            options.title = esc(options.title);
+            options.author = esc(options.author);
+            options.publisher = esc(options.publisher);
+            options.description = esc(options.description);
+            options.contributor = esc(options.contributor);
+
             // 图片 manifest 条目：跟踪 base64toImage 写入的所有图片文件名
             var imageManifestItems = [];
 
@@ -362,13 +373,16 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                         var result = this.base64toImage(options.contentArray[i], imagesFolder);
                         options.contentArray[i] = result[0];
                         imageManifestItems = imageManifestItems.concat(result[1]);
+                        // 剥离 <body> 和 </body> 标签，避免 page.html 模板产生双重 <body>
+                        var rawContent = options.contentArray[i];
+                        rawContent = rawContent.replace(/<\/?body[^>]*>/gi, '');
                         // 对所有自闭合标签做规范化：<br> → <br/>、<br/><br/> → <br/>、<br class="x"/> → <br class="x"/>
                         // 避免苹果 Books 的 XML 解析器将 <br> 当作未闭合标签，导致 "Opening and ending tag mismatch: br line 11 and div"
-                        options.contentArray[i] = options.contentArray[i].replace(/<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)([^>]*?)>/gi, function(match, tag, attrs) {
+                        rawContent = rawContent.replace(/<(area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)([^>]*?)>/gi, function(match, tag, attrs) {
                             return '<' + tag + attrs + '/>';
                         });
                         //生成html数据;
-                        textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : options.contentArray[i], options: options }));
+                        textFolder.file("chapter" + i + ".html", Handlebars.compile(this.page)({ body : rawContent, options: options }));
                     }
                 } catch(e) {
                     console.error("章节内容处理失败:", e);
@@ -376,7 +390,7 @@ define(["Construct/DublinCore"], function( DublinCore ) {
 
             var MeTaFolder = zip.folder("META-INF");
             MeTaFolder.file("container.xml", this.container);
-            zip.file("mimetype", this.mimetype);
+            zip.file("mimetype", this.mimetype, { compression: "STORE" });
 
             //防止创建书籍封面时意外的发生;
             try{
