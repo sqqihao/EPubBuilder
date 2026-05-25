@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<ncx xmlns="http://www.daisy.org/z3986/2005/ncx/" version="2005-1">
+    <head>
+        <meta charset="UTF-8"/>
+    </head>
+    <docTitle>
+        <text>
+            {{title}}
+        </text>
+    </docTitle>
+    <docAuthor>
+        <text>
+            {{author}}
+        </text>
+    </docAuthor>
+    <navMap>
+        {{#each tocItem}}
+            <navPoint class="{{href}}" id="{{href}}" playOrder="{{@index}}">
+                <!--
+                    如果是coverpage， 封面页的话， 不生成toc结构;
+                    对封面页的数据进行也是特殊处理， 不让封面的地址出现在toc.ncx， 但是出现在content.opf中;
+                -->
+                {{#unless this.isCoverPage}}
+                    <navLabel>
+                        <text>
+                            {{name}}
+                        </text>
+                        </navLabel>
+                    <content src="Text/{{href}}" />
+                {{/unless}}
+            </navPoint>
+        {{/each}}
+    </navMap>
+</ncx>

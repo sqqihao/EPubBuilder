@@ -1,0 +1,56 @@
+
+html,body{
+    height: 100%;
+    font-family: "微软雅黑";
+}
+ul{
+    padding:0;
+    margin:0;
+}
+
+a{
+    color: #000;
+    cursor: pointer;
+}
+
+.height100per{
+    height: 100%;
+}
+
+.selectnone{
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    userselect: none;
+}
+
+.padding0{
+    padding:0;
+}
+
+.marginLeft10{
+    margin-left:10px;
+}
+
+
+.mt4{
+    margin-top:4px;
+}
+
+.borderCommon{
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    min-height: 540px;
+}
+
+.overflowauto{
+    overflow: auto;
+}
+
+/**
+*@desc https://github.com/fex-team/umeditor/issues/147
+*#拖拽图片改变大小，无论从哪个方向拖拽都只会越来越小 #147
+*/
+.edui-scale{
+    box-sizing:initial;
+}

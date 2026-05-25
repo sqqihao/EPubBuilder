@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    -->
+
+    <link rel="stylesheet" href="third/bootstrap-4.0.0-alpha/css/bootstrap.css"/>
+    <link rel="stylesheet" href="third/font-awesome-4.4.0/css/font-awesome.css"/>
+    <!---
+    artDialog的css和rtDialog的opera风格样式
+    <link rel="stylesheet" href="third/artDialog-master/css/ui-dialog.css" />
+    <link rel="stylesheet" href="third/artDialog-master/css/opera.css" />
+    -->
+
+    <link rel="stylesheet" href="css/common.css"/>
+    <link rel="stylesheet" href="css/main.css"/>
+
+
+    <!--
+        0：jquery
+        1：弹窗插件
+        2：bootstrap
+    -->
+    <script src="third/jq1.9.js"></script>
+    <!--
+    <script src="third/artDialog-master/dist/dialog-plus-min.js"></script>
+    -->
+    <script src="third/bootstrap-4.0.0-alpha/js/bootstrap.min.js"></script>
+    <script src="third/prefixfree.min.js"></script>
+    <script src="third/handlebars.js"></script>
+    <script src="third/underscore.js"></script>
+    <!--
+        backbone版本号是1.2.3;
+    -->
+    <script src="third/backbone.js"></script>
+
+    <!--
+        压缩和解压缩需要zip.js;
+    -->
+    <!--
+    <script src="http://gildas-lormeau.github.io/zip.js/demos/zip.js"></script>
+    <script src="http://gildas-lormeau.github.io/zip.js/demos/mime-types.js"></script>
+    -->
+
+    <!--
+    引用第三方的编辑器;
+    -->
+    <link rel="stylesheet" href="third/umeditor/themes/default/css/umeditor.min.css"/>
+    <script type="text/javascript" charset="utf-8" src="third/umeditor/dist/umeditor.config.js"></script>
+    <script src="third/umeditor/dist/umeditor.min.js"></script>
+    <script type="text/javascript" src="third/umeditor/lang/zh-cn/zh-cn.js"></script>
+
+    <!--
+    <script src="third/umeditor/_src/plugins/imagePlugin.js"></script>
+    -->
+    <!---
+        使用xmlns的组件;
+    -->
+    <!--
+    <script src="third/jquery.xmlns.js"></script>
+    -->
+    <!--
+    <script src="http://julianlam.github.io/tabIndent.js/js/tabIndent.js"></script>-->
+    <!--
+        引用基本的JS组件;
+    -->
+    <script src="js/ui.js"></script>
+    <script src="js/util.js"></script>
+    <script src="lang/i18n.js"></script>
+    <script src="js/config.js"></script>
+</head>
+<body>
+    <div class="container-fluid header">
+        <div class="row">
+            <div class="mt4 selectnone clearfix">
+                <div class="col-xs-5">
+                    <button type="button" id="open" class="btn btn-primary">
+                        <i class="fa fa-folder-open"></i>
+                        <span id="lang-open"></span>
+                    </button>
+                    <button type="button" id="download" class="btn btn-primary"  data-toggle="modal" data-target=".export-div">
+                        <i class="fa fa-download"></i>
+                        <span id="lang-download"></span>
+                    </button>
+                </div>
+                <div class="col-xs-2">
+                    <div  id="title" class="title">
+                        <span ><i class="fa fa-pencil-square"></i>
+                            <span id="lang-title"></span>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-5">
+                    <span  class="pull-left lang-preview">
+                        <span id="lang-preview">
+
+                        </span>
+                        :
+                    </span>
+                    <div class="toggle pull-left">
+                        <label class="toggle-radio" for="toggleOption2">OFF</label>
+                        <input type="radio" name="toggleOptions" id="toggleOption1" value="option1" checked="checked">
+                        <label class="toggle-radio" for="toggleOption1">ON</label>
+                        <input type="radio" name="toggleOptions" id="toggleOption2" value="option2">
+                    </div>
+                    <button type="button" class="btn btn-info pull-right marginLeft10"  data-toggle="modal"  data-target="#help">
+                        <i class="fa fa-info-circle"></i>
+                        <span id="lang-about"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="help" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">
+                        <span id="lang-about-title">
+
+                        </span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    作者：nono <br>
+                    软件作用：一款在线的Epub电子书编辑器; <br>
+                    源码地址：<a target="_blank" href="https://github.com/sqqihao/EPubBuilder">https://github.com/sqqihao/EPubBuilder</a> <br>
+                    个人博客：<a target="_blank" href="http://www.cnblogs.com/diligenceday/">http://www.cnblogs.com/diligenceday/</a> <br>
+                    bug提交地址：<a target="_blank" href="https://github.com/sqqihao/EPubBuilder/issues">https://github.com/sqqihao/EPubBuilder/issues</a><br>
+                    qq：287101329<br>
+                    版本号：1.0.4<br>
+                    最后更新日期：2016 . 4<br>
+                    修复问题：添加了书籍封面的功能
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bodyer">
+        <div class="row height100per">
+            <div class="col-xs-2 height100per overflowauto selectnone">
+                <!--
+                左侧分页导航栏
+                -->
+                <div class="borderCommon height100per"  id="left-nav" >
+                    <ul class="left-nav">
+                    </ul>
+                    <button type="button" class="btn btn-primary addli">
+                        <i class="fa fa-file"></i>
+                        <span id="lang-create"></span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-xs-10 height100per overflowauto">
+                <ul id="content-nav" class="content-nav height100per">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid footer">
+        <div class="row">
+            <div id="info" class="alert-info padding0">
+                <span id="lang-state">
+                </span>：
+                <span id="lang-stateValue">
+                </span>
+                ....
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade export-div" tabindex="-1" role="dialog" aria-labelledby="export-div" >
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content container">
+                <div class="row">
+                    <form class="col-xs-10 col-xs-push-1 col-xs-pull-1">
+                        <h3>
+                            <span id="lang-dc">  </span>
+                        </h3>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="publisher" placeholder="publisher" aria-describedby="publisher">
+                        </div>
+                        <div class="form-group">
+                            <input type="file" class="form-control" name="coverImage" placeholder="coverImage" accept="image/*" aria-describedby="coverImage">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="description" placeholder="description" aria-describedby="description">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="language" placeholder="language" aria-describedby="language">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="author" placeholder="author" aria-describedby="author">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="title" placeholder="title" aria-describedby="title">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="date" placeholder="date" aria-describedby="date">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="contributor" placeholder="contributor" aria-describedby="contributor">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="ISBN" placeholder="ISBN" aria-describedby="ISBN">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="fileName" placeholder="file-name" aria-describedby="fileName">
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-default" id="build">
+                                <span id="lang-downloadEpub">  </span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/jszip.min.js"></script>
+    <script src="js/FileSaver.js"></script>
+    <script src="js/util.js"></script>
+    <script src="third/require1.08.js" data-main="js/app"></script>
+</body>
+</html>

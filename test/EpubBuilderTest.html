@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../static/third/jq1.9.js"></script>
+    <script src="../static/js/jszip.min.js"></script>
+    <script src="../static/js/FileSaver.js"></script>
+    <script src="../static/third/handlebars.js"></script>
+    <script src="../static/js/util.js"></script>
+    <script src="../static/js/EpubBuilder.js"></script>
+</head>
+<body>
+<script>
+    var epub = new EpubBuilder();
+    epub.exportToEpub({
+        contentArray : ["1","2"],
+        tocArray : ["1","2"]
+    });
+</script>
+</body>
+</html>

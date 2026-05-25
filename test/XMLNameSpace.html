@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="../src/third/jq1.9.js"></script>
+    <script>
+        window.define = function ( fn ) {
+            window.Toc = fn();
+        };
+    </script>
+    <script src="../src/js/Construct/DublinCore.js"></script>
+</head>
+<body class="export-div">
+    <form>
+        <div class="form-group">
+            <input type="text" class="form-control" name="coverpage" placeholder="coverpage" aria-describedby="coverpage">
+        </div>
+        <div class="input-group input-group-sm form-group">
+            <span class="input-group-addon" id="coverImage">coverImage</span>
+            <input type="file" class="form-control" name="coverImage" placeholder="coverImage" aria-describedby="coverImage">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="publisher" placeholder="publisher" aria-describedby="publisher">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="description" placeholder="description" aria-describedby="description">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="language" placeholder="language" aria-describedby="language">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="author" placeholder="author" aria-describedby="author">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="title" placeholder="title" aria-describedby="title">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="date" placeholder="date" aria-describedby="date">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="contributor" placeholder="contributor" aria-describedby="contributor">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="ISBN" placeholder="ISBN" aria-describedby="ISBN">
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="fileName" placeholder="file-name" aria-describedby="fileName">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-default" id="build">DownloadEpub</button>
+        </div>
+    </form>
+<script>
+    var _this = window;
+    $.ajax({async:false, type:"get", dataType : "text" ,url:"../src/epub/OPS/content.opf", "success":function(data) {
+        _this.contentOpt = data;
+        var domParser = new DOMParser();
+        var contentOptXmlDoc = domParser.parseFromString(_this.contentOpt, 'text/xml');
+        var toc = new Toc();
+        toc.setDublinCore(contentOptXmlDoc);
+    }});
+</script>
+</body>
+</html>

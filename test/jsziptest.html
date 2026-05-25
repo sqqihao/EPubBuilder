@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <!--
+    <script src="../static/js/jsziptools.js"></script>
+    -->
+    <script src="../static/js/jszip.min.js"></script>
+    <script src="../static/js/FileSaver.js"></script>
+</head>
+<body>
+    test.js.zip;
+<script>
+    var zip = new JSZip();
+
+    zip.file("Hello.txt", "Hello World\n");
+
+    var img = zip.folder("images");
+
+    var content = zip.generate({type:"blob"});
+
+    // see FileSaver.js
+    saveAs(content, "example.zip");
+    /*
+    var files = [
+        {name: "foo", dir: [ // folder
+            {name: "hello.txt", buffer: "Hello World!"}, // string
+        ]}
+    ];
+    jz.zip.pack({
+        files: files,
+        level: 5
+    }).then(function ( packed ) {
+        var blob = new Blob([packed]);
+        var url = (window.URL || window.webkitURL).createObjectURL(blob);
+        var a = document.createElement('a');
+        a.download = 'test.zip';
+        a.href = url;
+
+        var e = document.createEvent("MouseEvent");
+        e.initEvent("click", true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+        a.dispatchEvent(e);
+    })*/
+</script>
+</body>
+</html>
