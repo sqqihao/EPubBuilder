@@ -393,6 +393,36 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             var tocItem = [];
             var contentItem = [];
 
+            //防止创建书籍封面时意外的发生;
+            try{
+                //创建书籍的封面;
+                if(options.coverImage.length) {
+                    // base64toImage 将 base64 图片写入 imagesFolder，返回 [html, filenames]
+                    // 封面页需要引用同一张图片，路径相对于 Text/coverpage.html，即 ../Images/uuid.ext
+                    var coverResult = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder);
+                    var imgTag = coverResult[0];
+                    var coverFilename = coverResult[1][0] || "";
+                    imageManifestItems = imageManifestItems.concat(coverResult[1]);
+                    var match = imgTag.match(/src=["']([^"']+)["']/);
+                    // base64toImage 返回 ../images/uuid（相对于 Text/coverpage.html）
+                    // coverpage.html img src 路径 → 相对于 Text/，需要 ../images/uuid
+                    // manifest href 路径 → 相对于 OPS/，需要 images/uuid（去掉 ../）
+                    options._coverImageSrc = match ? match[1] : "";  // 原始 ../images/uuid
+                    var coverHref = match ? match[1].replace(/^\.\.\//, "") : "";  // images/uuid
+                    options.coverImage = coverHref;
+                    options._coverImageName = coverFilename;
+                    var ext = coverFilename.split(".").pop().toLowerCase();
+                    options._coverImageMediaType = ext === "png" ? "image/png" : "image/jpeg";
+                };
+            }catch(e) {
+                options.coverImage = "";
+            }
+
+            /*
+            if (options.coverImage.length) {
+                textFolder.file("coverpage.html", Handlebars.compile(this.coverpage)({ options: options }));
+            }
+            */
                 try{
                     for(var i=0; i< chapterLength; i++) {
                         // 提取二级目录：从 content 中解析 h2/h3 标签生成子章节
@@ -452,6 +482,14 @@ define(["Construct/DublinCore"], function( DublinCore ) {
                         });
                         // 删除空白的 h2/h3 标签（只有空白文字的标题）
                         rawContent = rawContent.replace(/<h[23][^>]*>\s*<\/h[23]>/gi, '');
+                        if(i==0){
+                            if (options.coverImage.length) {
+                                rawContent = "<p><img src='../"+options.coverImage+"' /> </p>"  // 图片路径可能不对
+                            }else{
+                                rawContent = rawContent.match(/<img[^>]+>/i)?.[0] || '';  // 无图时只留 img
+                            }
+                        }
+
                         //生成html数据;
                         textFolder.file(i==0?"coverpage.html":"chapter" + i + ".html", Handlebars.compile(this.page)({ body : rawContent, options: options }));
                     }
@@ -463,36 +501,6 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             MeTaFolder.file("container.xml", this.container);
             zip.file("mimetype", this.mimetype, { compression: "STORE" });
 
-            //防止创建书籍封面时意外的发生;
-            try{
-                //创建书籍的封面;
-                if(options.coverImage.length) {
-                    // base64toImage 将 base64 图片写入 imagesFolder，返回 [html, filenames]
-                    // 封面页需要引用同一张图片，路径相对于 Text/coverpage.html，即 ../Images/uuid.ext
-                    var coverResult = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder);
-                    var imgTag = coverResult[0];
-                    var coverFilename = coverResult[1][0] || "";
-                    imageManifestItems = imageManifestItems.concat(coverResult[1]);
-                    var match = imgTag.match(/src=["']([^"']+)["']/);
-                    // base64toImage 返回 ../images/uuid（相对于 Text/coverpage.html）
-                    // coverpage.html img src 路径 → 相对于 Text/，需要 ../images/uuid
-                    // manifest href 路径 → 相对于 OPS/，需要 images/uuid（去掉 ../）
-                    options._coverImageSrc = match ? match[1] : "";  // 原始 ../images/uuid
-                    var coverHref = match ? match[1].replace(/^\.\.\//, "") : "";  // images/uuid
-                    options.coverImage = coverHref;
-                    options._coverImageName = coverFilename;
-                    var ext = coverFilename.split(".").pop().toLowerCase();
-                    options._coverImageMediaType = ext === "png" ? "image/png" : "image/jpeg";
-                };
-            }catch(e) {
-                options.coverImage = "";
-            }
-
-            /*
-            if (options.coverImage.length) {
-                textFolder.file("coverpage.html", Handlebars.compile(this.coverpage)({ options: options }));
-            }
-            */
             // 生成 content.opf 之前，注入图片 manifest 条目
             var imageManifestHtml = "";
             // deduplicate + 生成 manifest item 标签
