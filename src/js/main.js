@@ -9,7 +9,10 @@
  * 左侧的视图， 右侧的可编辑内容；
  * 约定标题名不能为"封面";
  * */
-define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construct/DublinCore", "Construct/Preview" , "Construct/Lang"], function( TitleList,  ContentList, EpubBuilder , DublinCore, Preview, Lang) {
+define(["Construct/TitleList", "Construct/ContentList", "EpubBuilder", "Construct/DublinCore", "Construct/Preview" , "Construct/Lang", "IndexedDBStore"], function( TitleList,  ContentList, EpubBuilder , DublinCore, Preview, Lang, IndexedDBStore) {
+
+    // IndexedDB store instance — used by EpubBuilder for recent-file storage
+    window.idbStore = new IndexedDBStore();
 
     var epub = new EpubBuilder();
 

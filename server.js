@@ -3,9 +3,8 @@ var express = require('express');
 var config = require('./config/config.js');
 var app = express();
 
-app.configure(function() {
-    app.use(express.static(__dirname + '/static'));
-});
+// Express 4.x compatible static middleware
+app.use(express.static(__dirname));
 
 /**
  * 视图目录和静态文件要分开， 否者会导致index.html的ejs语法不生效， 不知道是不是bug;
@@ -13,7 +12,7 @@ app.configure(function() {
 app.set('views', __dirname + '/views');
 app.engine('html', require('ejs').renderFile);
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/uptoken', function(req, res, next) {
     var token = uptoken.token();

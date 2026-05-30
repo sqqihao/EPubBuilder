@@ -1,4 +1,4 @@
-define(["Construct/DublinCore"], function( DublinCore ) {
+define(["Construct/DublinCore", "Construct/Lang"], function( DublinCore, Lang ) {
     
     //压缩成zip的工具:   JSZIP;
     var EpubBuilder = function () {
@@ -61,21 +61,181 @@ define(["Construct/DublinCore"], function( DublinCore ) {
             return fileurl.split(".").pop() || "";
         },
         /**
-         * @desc 导入epub文件
-         * @param {Object} pubData把数据导入到pubdata中;
+         * @desc 导入epub文件 — 打开 Modal（本地选择 + 近期文件）
+         * @param {Object} pubData 把数据导入到pubdata中;
          * */
         "importEpub" : function( setData ) {
-
             var _this = this;
-            var $input = $("<input type='file' >");
-            $input.bind("change", function( ev ) {
-                util.readArrayBuffer( ev.target.files[0]).done(function( arrayBuffer ) {
+            this.openFileModal(setData);
+        },
+
+        /**
+         * @desc 打开文件选择 Modal
+         */
+        "openFileModal" : function( setData ) {
+            var _this = this;
+            var lang = EBConfig.lang;
+            var I18N = nono.I18N[lang] || nono.I18N['en'];
+
+            // 移除旧 Modal
+            $("#open-file-modal").remove();
+
+            // 动态构建 Modal HTML
+            var modalHtml = [
+                '<div class="modal fade" id="open-file-modal" tabindex="-1" role="dialog" aria-labelledby="open-file-modal-label">',
+                '  <div class="modal-dialog" role="document">',
+                '    <div class="modal-content">',
+                '      <div class="modal-header">',
+                '        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+                '        <h4 class="modal-title" id="open-file-modal-label"><span id="lang-open-file"></span></h4>',
+                '      </div>',
+                '      <div class="modal-body">',
+                '        <!-- 上：本地文件选择 -->',
+                '        <div class="open-file-section">',
+                '          <div class="section-title"><span id="lang-select-local-file"></span></div>',
+                '          <div class="local-file-upload text-center">',
+                '            <input type="file" id="local-file-input" accept=".epub,application/epub+zip" style="display:none"/>',
+                '            <button type="button" class="btn btn-primary" id="select-local-btn" title="'+I18N["select-local-file"]+'">',
+                '              <span class="glyphicon glyphicon-folder-open"></span>&nbsp;<span id="lang-select-local-file-btn"></span>',
+                '            </button>',
+                '          </div>',
+                '        </div>',
+                '        <!-- 下：近期文件列表 -->',
+                '        <div class="open-file-section recent-section">',
+                '          <div class="section-title">',
+                '            <span id="lang-recent-files"></span>',
+                '            <button type="button" class="btn btn-link btn-xs pull-right" id="clear-history-btn" title="'+I18N["confirm-clear"]+'"><span id="lang-clear-history"></span></button>',
+                '          </div>',
+                '          <div class="recent-list" id="recent-list-container">',
+                '            <div class="no-recent-files" id="lang-no-recent-files"></div>',
+                '          </div>',
+                '        </div>',
+                '      </div>',
+                '    </div>',
+                '  </div>',
+                '</div>'
+            ].join('');
+
+            $("body").append(modalHtml);
+
+            // 初始化 i18n
+            new Lang().init();
+
+            // 打开 Modal
+            $("#open-file-modal").modal("show");
+
+            // 本地文件选择
+            $("#select-local-btn").on("click", function() {
+                $("#local-file-input").trigger("click");
+            });
+
+            $("#local-file-input").on("change", function(ev) {
+                var file = ev.target.files[0];
+                if (!file) return;
+                $("#open-file-modal").modal("hide");
+                util.readArrayBuffer(file).done(function(arrayBuffer) {
+                    var blob = new Blob([arrayBuffer], { type: "application/epub+zip" });
+                    // 保存到 IndexedDB
+                    idbStore.saveEpub(file.name, blob, function(err) {
+                        if (err) console.error("IDB save error:", err);
+                    });
                     var unzip = JSZip(arrayBuffer);
-                    _this.readEpub( unzip, setData );
+                    _this.readEpub(unzip, setData);
                 });
             });
-            $input.trigger("click");
 
+            // 加载近期文件列表
+            _this.renderRecentList(setData);
+
+            // 清除历史
+            $("#clear-history-btn").on("click", function() {
+                var msg = I18N["confirm-clear"] || "Clear all history?";
+                if (confirm(msg)) {
+                    idbStore.clearAll(function() {
+                        _this.renderRecentList(setData);
+                    });
+                }
+            });
+
+            // Modal 关闭后清理
+            $("#open-file-modal").on("hidden.bs.modal", function() {
+                $(this).remove();
+            });
+        },
+
+        /**
+         * @desc 渲染近期文件列表
+         */
+        "renderRecentList" : function( setData ) {
+            var _this = this;
+            var lang = EBConfig.lang;
+            var I18N = nono.I18N[lang] || nono.I18N['en'];
+            var container = $("#recent-list-container");
+            if (!container.length) return;
+
+            idbStore.getRecentList(function(err, list) {
+                if (err || !list || list.length === 0) {
+                    container.html('<div class="no-recent-files" id="lang-no-recent-files"></div>');
+                    new Lang().init();
+                    return;
+                }
+                var html = '';
+                list.forEach(function(item) {
+                    var date = item.lastOpened ? new Date(item.lastOpened).toLocaleDateString() : '';
+                    var size = item.size ? _this.formatSize(item.size) : '';
+                    html += [
+                        '<div class="recent-item" data-name="' + encodeURIComponent(item.name) + '">',
+                        '  <span class="recent-item-name" title="' + item.name + '">' + item.name + '</span>',
+                        '  <span class="recent-item-meta">' + (date ? date : '') + (size ? ' &nbsp;' + size : '') + '</span>',
+                        '  <button type="button" class="btn btn-link btn-xs recent-item-delete" title="' + (I18N["delete"] || "Delete") + '">&times;</button>',
+                        '</div>'
+                    ].join('');
+                });
+                container.html(html);
+
+                // 点击文件加载
+                container.find(".recent-item").on("click", function(e) {
+                    if ($(e.target).hasClass("recent-item-delete")) return;
+                    var name = decodeURIComponent($(this).data("name"));
+                    $("#open-file-modal").modal("hide");
+                    idbStore.getEpub(name, function(err, blob) {
+                        if (err) {
+                            alert("File not found: " + name);
+                            return;
+                        }
+                        var arrayBuffer;
+                        try {
+                            arrayBuffer = blob.arrayBuffer();
+                        } catch(e) {
+                            alert("Failed to read file: " + name);
+                            return;
+                        }
+                        arrayBuffer = blob.arrayBuffer().then(function(ab) {
+                            var unzip = JSZip(ab);
+                            _this.readEpub(unzip, setData);
+                        });
+                    });
+                });
+
+                // 删除按钮
+                container.find(".recent-item-delete").on("click", function(e) {
+                    e.stopPropagation();
+                    var name = decodeURIComponent($(this).closest(".recent-item").data("name"));
+                    idbStore.deleteEpub(name, function() {
+                        _this.renderRecentList(setData);
+                    });
+                });
+            });
+        },
+
+        /**
+         * @desc 格式化文件大小
+         */
+        "formatSize" : function(bytes) {
+            if (!bytes) return '';
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
         },
 
         /**

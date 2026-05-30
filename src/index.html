@@ -71,7 +71,23 @@
     <script src="js/ui.js"></script>
     <script src="js/util.js"></script>
     <script src="lang/i18n.js"></script>
+    <script>
+    // URL param override for lang testing: ?lang=zh-cn or ?lang=en
+    (function() {
+        var params = new URLSearchParams(window.location.search);
+        var lang = params.get('lang');
+        if (lang === 'zh-cn' || lang === 'en') {
+            window.__HERMES_LANG_PARAM__ = lang;
+        }
+    })();
+    </script>
     <script src="js/config.js"></script>
+    <script>
+    // Override lang from URL param if present
+    if (window.__HERMES_LANG_PARAM__) {
+        EBConfig.lang = window.__HERMES_LANG_PARAM__;
+    }
+    </script>
 </head>
 <body>
     <div class="container-fluid header">
@@ -230,6 +246,7 @@
     <script src="js/jszip.min.js"></script>
     <script src="js/FileSaver.js"></script>
     <script src="js/util.js"></script>
+    <script src="js/IndexedDBStore.js"></script>
     <script src="third/require1.08.js" data-main="js/app"></script>
 </body>
 </html>
