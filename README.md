@@ -27,4 +27,4 @@ src/js/tpl文件夹包含了的基础模板;
 测试用例文件夹， 一些小demo
 
 #演示地址
-[http://sqqihao.github.io/EPubBuilder/src/index.html](http://sqqihao.github.io/EPubBuilder/src/index.html)
+[http://sqqihao.github.io/EPubBuilder/src/index.html?lang=zh-cn](http://sqqihao.github.io/EPubBuilder/src/index.html?lang=zh-cn)（中文）
