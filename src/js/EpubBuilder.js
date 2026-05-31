@@ -326,7 +326,7 @@ define(["Construct/DublinCore", "Construct/Lang"], function( DublinCore, Lang ) 
                     $target = $content.find("html");
                 }
                 $content = $target.contents();
-                var imgs = $content.find("image").add( $content.find("img") );
+                var imgs = $content.find("image,img").addBack().filter("image,img");
                 $.each(imgs, function (i,  img ) {
                     //把处理图片的逻辑添加的延迟对象中;
                     def = def.then(function() {
@@ -458,6 +458,7 @@ define(["Construct/DublinCore", "Construct/Lang"], function( DublinCore, Lang ) 
                     } catch(err) {
                         console.warn("图片压缩失败，使用原图:", err);
                     }
+                    
                     var uuid = util.uuid() + "." + outputExt;
                     zipImageFolder.file(uuid, dataUrl, {base64: true});
                     imageFilenames.push(uuid);
