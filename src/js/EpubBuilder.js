@@ -558,6 +558,11 @@ define(["Construct/DublinCore", "Construct/Lang"], function( DublinCore, Lang ) 
             try{
                 //创建书籍的封面;
                 if(options.coverImage.length) {
+                    // 只接受 image/png 或 image/jpeg 的 base64，过滤掉其他格式（如 xhtml）
+                    var isValidImage = /^data:image\/(png|jpeg|jpg);base64,/.test(options.coverImage);
+                    if (!isValidImage) {
+                        options.coverImage = "";
+                    } else {
                     // base64toImage 将 base64 图片写入 imagesFolder，返回 [html, filenames]
                     // 封面页需要引用同一张图片，路径相对于 Text/coverpage.html，即 ../Images/uuid.ext
                     var coverResult = this.base64toImage($("<img>").attr("src",options.coverImage), imagesFolder);
@@ -573,7 +578,9 @@ define(["Construct/DublinCore", "Construct/Lang"], function( DublinCore, Lang ) 
                     options.coverImage = coverHref;
                     options._coverImageName = coverFilename;
                     var ext = coverFilename.split(".").pop().toLowerCase();
-                    options._coverImageMediaType = ext === "png" ? "image/png" : "image/jpeg";
+                    var mimeMap = { "png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg" };
+                    options._coverImageMediaType = mimeMap[ext] || "image/jpeg";
+                    }
                 };
             }catch(e) {
                 options.coverImage = "";
@@ -648,6 +655,12 @@ define(["Construct/DublinCore", "Construct/Lang"], function( DublinCore, Lang ) 
                                 rawContent = "<p><img src='../"+options.coverImage+"' /> </p>"  // 图片路径可能不对
                             }else{
                                 rawContent = rawContent.match(/<img[^>]+>/i)?.[0] || '';  // 无图时只留 img
+                                if (rawContent) {
+                                    var srcMatch = rawContent.match(/src=["']([^"']+)["']/);
+                                    if (srcMatch) {
+                                        options.coverImage = srcMatch[1].replace(/^\.\.\//, '');
+                                    }
+                                }
                             }
                         }
 
